@@ -11,10 +11,9 @@ Prerequisites
 
 Please make sure to have this completed prior to the workshop beginning. To participate in this workshop, you'll need to do the following on your own laptops:
 
--   Have the latest version of R AND RStudio installed ([Directions are here](http://moderndive.netlify.com/2-getting-started.html#what-are-r-and-rstudio))
--   Be familiar with the [basics of the RStudio Interface](https://ismayc.github.io/rbasics-book/3-rstudiobasics.html#rstudio-layout)
--   (Optional) The workshop materials will be presented in R Markdown format. You may want to read a little more about this [here](https://ismayc.github.io/rbasics-book/4-rmarkdown.html) before the workshop begins and play around with R Markdown documents some first.
--   Have the following R packages installed:
+1.  Have the latest version of R AND RStudio installed ([Directions are here](http://moderndive.netlify.com/2-getting-started.html#what-are-r-and-rstudio))
+2.  Be familiar with the [basics of the RStudio Interface](https://ismayc.github.io/rbasics-book/3-rstudiobasics.html#rstudio-layout)
+3.  Have the following R packages installed:
     -   `tidyverse`, `plotly`, `gapminder`, and `fivethirtyeight`
 
 This can be accomplished by copying the following code into the *Console* in RStudio and pressing Enter. Note that you'll see quite a few lines of code run while the packages are installing. Don't be alarmed. After all four of these packages are installed you should see them listed in the Packages tab in the bottom right section of RStudio.
@@ -26,16 +25,25 @@ This can be accomplished by copying the following code into the *Console* in RSt
 -   The [`gapminder`](https://github.com/jennybc/gapminder/blob/master/README.md) package contains a data set made famous by Hans Rosling exploring data on the world's countries.
 -   The [`fivethirtyeight`](http://fivethirtyeight-r.netlify.com/) package contains many datasets used by data journalists at FiveThirtyEight.com.
 
+IMPORTANT FINAL STEP
+--------------------
+
+-   Download the conference materials as a [ZIP file](https://github.com/tidyverse-intro/gradual_visualization/archive/master.zip) and extract the files there as a folder on your computer. Double click on the **gradual\_visualization.Rproj** file in that folder to open up an RStudio project containing the files needed for the workshop.
+
+You'll be following along in the **Part1-ggplot2\_intro.Rmd**, **Part2-working\_with\_factors.Rmd**, and **Part3-interactive\_plots.Rmd** files, running the R code in the "chunks" there, and writing your own code to practice.
+
 Remember, in this workshop we will adhere the [code of conduct for this conference](https://cascadiarconf.com/coc/). Be respectful of your fellow students and let's learn together.
 
 Outline of this Workshop
 ------------------------
+
+Please bring a pencil, at least one color of pen, and some paper to write on.
 
 1.  Visualizing continuous data (scatterplots)
     -   Learning about `aes`thetics and `mapping` of variables
     -   Some basic `geom`etries
 2.  Visualizing categorical data
     -   More about `geom`s
-    -   Learning about create small multiple plots using `facet`ing
+    -   Learning to create small multiple plots using `facet`ing
 3.  Visualizing categorical versus continuous data (boxplots)
 4.  Making your plots interactive using the `ggplotly()` function in the `plotly` package

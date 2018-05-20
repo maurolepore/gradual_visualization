@@ -6,6 +6,7 @@ output: github_document
 
 Welcome! This is a workshop for the Cascadia R conference that is meant to be a gentle introduction to data visualization using the `ggplot2` and the `plotly` packages. 
 
+
 You'll learn the basics of the grammar of graphics and learn how to visualize and understand relationships between different kinds of variables in your dataset.
 
 ## Prerequisites
@@ -30,7 +31,7 @@ install.packages(c("tidyverse", "plotly", "gapminder", "fivethirtyeight"))
 
 ## IMPORTANT FINAL STEP
 
-4. Download the conference materials as a ZIP file and extract the files there as a folder on your computer. Double click on the **gradual_visualization.Rproj** file to open up an RStudio project containing the files needed for the workshop.  
+- Download the conference materials as a [ZIP file](https://github.com/tidyverse-intro/gradual_visualization/archive/master.zip) and extract the files there as a folder on your computer. Double click on the **gradual_visualization.Rproj** file in that folder to open up an RStudio project containing the files needed for the workshop.  
 
 You'll be following along in the **Part1-ggplot2_intro.Rmd**, **Part2-working_with_factors.Rmd**, and **Part3-interactive_plots.Rmd** files, running the R code in the "chunks" there, and writing your own code to practice.
     
