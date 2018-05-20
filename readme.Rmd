@@ -18,7 +18,7 @@ To participate in this workshop, you'll need to do the following:
     - `tidyverse`, `plotly`, `gapminder` and `fivethirtyeight`
 
 ```
-install.packages("tidyverse", "plotly", "gapminder" and "fivethirtyeight")
+install.packages("tidyverse", "plotly", "gapminder", "fivethirtyeight")
 ```
     
 Remember, in this workshop we will adhere the [code of conduct for this conference](https://cascadiarconf.com/coc/). Be respectful of your fellow students and let's learn together.
@@ -32,5 +32,5 @@ Remember, in this workshop we will adhere the [code of conduct for this conferen
     - More about geoms
     - Learning about faceting
 1. Visualizing categorical versus continuous data (boxplots)
-1. Making your plots interactive with `plotly`
+1. Making your plots interactive using the `ggplotly` function in the `plotly` package
 
