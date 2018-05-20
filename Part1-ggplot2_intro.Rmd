@@ -38,8 +38,7 @@ Consider the following data in tidy format:
 ```{r include=FALSE}
 library(tidyverse)
 
-simple_ex <-
-  data_frame(
+simple_ex <- data_frame(
     A = c(1980, 1990, 2000, 2010),
     B = c(1, 2, 4, 5),
     C = c(3, 2, 1, 2),
@@ -73,7 +72,7 @@ ggplot(data = simple_ex, mapping = aes(x = A, y = B)) +
 ```{r}
 ggplot(data = simple_ex, mapping = aes(x = A, y = B)) + 
   geom_point() +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm", se = FALSE)
 ```
 
 
@@ -100,7 +99,7 @@ ggplot(data = simple_ex, mapping = aes(x = A, y = B)) +
 
 Recreate the gapminder plot shown at the beginning of this workshop (and below) using `ggplot2` and the `gapminder` data frame in the `gapminder` package.  The [Data Visualization Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) from [RStudio](https://www.rstudio.com/resources/cheatsheets/) may be helpful.  
 
-**Note**:  To focus on only the rows in the data frame corresponding to 1992 we've created a dataset and saved the file as a CSV (basic spreadsheet) file in the `data` folder. We'll see how to use the `filter` function from `dplyr` to perform this subsetting in the afternoon workshop.
+**Note**:  To focus on only the rows in the data frame corresponding to 1992 we've created a dataset and saved the file as a CSV (basic spreadsheet) file in the `data` folder. Recall from this morning's workshop, the `filter` function from `dplyr` can be used to perform this. (Try on your own to do this if you wish!)
 
 ![](figs/gapminder.png)
 

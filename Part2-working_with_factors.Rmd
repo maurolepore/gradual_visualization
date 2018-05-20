@@ -28,7 +28,7 @@ There are two kinds of factors:
 
 We'll manipulate our barplot and add more information using factors.
 
-Here's the simple dataset we'll use to investigate how to work with factors in `ggplot`. Here we also introduce how to read in data stored in an R data file (an RDS) into a data frame in R. This also acts as a primer to when we discuss importing data in the afternoon workshop. 
+Here's the simple dataset we'll use to investigate how to work with factors in `ggplot`. Here we also introduce how to read in data stored in an R data file (an RDS) into a data frame in R. Note the similarities with reading in CSV files (`read_rds()` versus `read_csv()`.)
 
 We display the `pets` data frame by simply running the line containing `pets`.
 
