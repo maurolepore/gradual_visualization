@@ -9,7 +9,7 @@ output:
 
 In this section, we'll discuss the Grammar of Graphics developed by [Leland Wilkinson](http://www.powells.com/book/the-grammar-of-graphics-9780387245447) and implemented in R via [Hadley Wickham](http://www.powells.com/book/ggplot2-elegant-graphics-for-data-analysis-9783319242750/68-428).  We'll see how this is applied to a scatterplot with and without a regression line.  These ideas will then be extended in Part 2 of the workshop.
 
-### The Grammar of Graphics
+## The Grammar of Graphics
 
 ![](figs/gapminder.png)
 
