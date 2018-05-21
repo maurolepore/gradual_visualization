@@ -1,0 +1,87 @@
+---
+title: "Part 3 - Converting to interactive graphics"
+author: "Chester Ismay"
+output: 
+  html_document:
+    code_download: true
+    code_folding: hide
+---
+
+Up to this point, we've worked with four different types of plots. Can you name them?
+
+These have all have been stationary plots though. You couldn't hover over values to gain greater insights with those. Using only one function, we can extend the vast majority of `ggplot` plots into interactive graphics. In our experience, these work best with scatterplots and line graphs. Let's see how!
+
+
+### Babies born per day
+
+The `fivethirtyeight` R package contains two data sets providing information from the US Social Security Administration on the number of baby births in the US over the last few decades. Let's focus on the [`US_births_2000_2014`](http://fivethirtyeight-r.netlify.com/reference/us_births_2000_2014) data set and in particular the year 2013.
+
+```{r message=FALSE}
+library(fivethirtyeight)
+# View(US_births_2000_2014)
+
+library(dplyr)
+US_births_2013 <- US_births_2000_2014 %>% 
+  filter(year == 2013)
+```
+
+Let's investigate how many babies were born on each day in 2013:
+
+```{r message=FALSE}
+library(ggplot2)
+ggplot(data = US_births_2013, mapping = aes(x = date, y = births)) +
+  geom_point()
+```
+
+See anything strange here? Let's try to get a better sense of what the specific days are by turning this into an interactive plot. By default, `ggplotly()` will create an interactive version of the last `ggplot` created.
+
+
+```{r message=FALSE}
+library(plotly)
+ggplotly()
+```
+
+Why are some dots far below the others?
+
+```{r}
+ggplot(data = US_births_2013, mapping = aes(x = date, y = births)) +
+  geom_line(mapping = aes(color = day_of_week))
+```
+
+### Your turn
+
+Use data visualization to determine which day (date and day of the week) had the highest and lowest number of births in 2013.
+
+```{r}
+# Enter your plot code here
+```
+
+`ggplotly()` doesn't work in all circumstances but is pretty slick when it does work! Note that you can also assign the plots to have a name and then use that as an argument to the `ggplotly()` function:
+
+```{r}
+all_days_scatter <- ggplot(data = US_births_2013, mapping = aes(x = date, y = births)) +
+  geom_point()
+by_day_line <- ggplot(data = US_births_2013, mapping = aes(x = date, y = births)) +
+  geom_line(mapping = aes(color = day_of_week))
+```
+
+```{r}
+ggplotly(all_days_scatter)
+```
+
+```{r}
+ggplotly(by_day_line)
+```
+
+
+## Conclusion
+
+One of the great things about learning about the Grammar of Graphics is that its mapping of aesthetics onto geometries extends to a variety of other tools as well, including the [`plotly()` syntax](https://plot.ly/r/getting-started/) and the Tableau visualization software. (That's one of the places [Leland Wilkinson works](https://research.tableau.com/user/leland-wilkinson) after all.)
+
+## More resources
+
+Ted and [Jessica Minnier](http://jessicaminnier.com/) created a free DataCamp course covering many of the topics covered here if you'd like to go back and practice on your own. Chester and [Albert Kim](http://rudeboybert.rbind.io/) wrote a [free introductory textbook](https://moderndive.netlify.com) to help beginners get going with R. We're biased but we also highly recommend Dave Robinson's [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse) course on DataCamp that Chester helped to author in his role at DataCamp.
+
+### Post-session survey
+
+We appreciate and yearn for your constructive and descriptive feedback so that we can improve as educators. To further support this, please feel out this [brief survey](https://goo.gl/forms/d0yb9nwvELrtS7t02).

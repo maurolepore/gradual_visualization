@@ -1,5 +1,8 @@
-A gRadual intRoduction to data visualization
-================
+---
+title: A gRadual intRoduction to data visualization
+author: Chester Ismay and Ted Laderas
+---
+
 Welcome! This is a workshop for the Cascadia R conference that is meant to be a gentle introduction to data visualization using the `ggplot2` and the `plotly` packages. 
 
 

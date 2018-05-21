@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Ted Laderas" />
+
+
+<title>Part 2 - Working with Factors</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Part2-working_with_factors.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cascadia R 2018 - Data Viz workshop</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Part1-ggplot2_intro.html">Part 1</a>
+</li>
+<li>
+  <a href="Part2-working_with_factors.html">Part 2</a>
+</li>
+<li>
+  <a href="Part3-interactive_plots.html">Part 3</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Part 2 - Working with Factors</h1>
+<h4 class="author"><em>Ted Laderas</em></h4>
+<h4 class="date"><em>5/18/2017</em></h4>
+
+</div>
+
+
+<p>In this section, we’ll learn some skills about manipulating factor (categorical) data.</p>
+<p>We’ll do this by making a bar plot progressively making it more complex. We’ll then dive into boxplots, a way to view the distribution of a variable across the categories of a different variable.</p>
+<div id="reviewing-factors" class="section level2">
+<h2>Reviewing Factors</h2>
+<p>Factors are frequently how R represents categorical data.</p>
+<p>There are two kinds of factors:</p>
+<ul>
+<li><code>factor</code> - used for <em>nominal</em> data (“Ducks”, “Cats”, “Dogs”)`</li>
+<li><code>ordered</code>- used for <em>ordinal</em> data (“10-30”,“31-40”,“41-60”)</li>
+</ul>
+<p>We’ll manipulate our barplot and add more information using factors.</p>
+<p>Here’s the simple dataset we’ll use to investigate how to work with factors in <code>ggplot</code>. Here we also introduce how to read in data stored in an R data file (an RDS) into a data frame in R. Note the similarities with reading in CSV files (<code>read_rds()</code> versus <code>read_csv()</code>.)</p>
+<p>We display the <code>pets</code> data frame by simply running the line containing <code>pets</code>.</p>
+<pre class="r"><code>library(tidyverse)
+pets &lt;- read_rds(&quot;data/pets.rds&quot;)
+pets</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["name"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["weight"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["animal"],"name":[4],"type":["fctr"],"align":["left"]},{"label":["age_category"],"name":[5],"type":["ord"],"align":["right"]},{"label":["shots_current"],"name":[6],"type":["fctr"],"align":["left"]}],"data":[{"1":"C1","2":"Morris","3":"6.0","4":"cat","5":"0-2","6":"No"},{"1":"C2","2":"Morris","3":"7.0","4":"cat","5":"5-8","6":"Yes"},{"1":"D1","2":"Fido","3":"15.0","4":"dog","5":"5-8","6":"No"},{"1":"D4","2":"Mr Bowser","3":"20.0","4":"dog","5":"3-4","6":"No"},{"1":"D8","2":"Fido","3":"40.0","4":"dog","5":"3-4","6":"Yes"},{"1":"C4","2":"Lady Sheba","3":"10.0","4":"cat","5":"5-8","6":"No"},{"1":"D5","2":"Hubert","3":"60.0","4":"dog","5":"0-2","6":"No"},{"1":"C10","2":"Apples","3":"17.0","4":"cat","5":"5-8","6":"Yes"},{"1":"G4","2":"Nibbles","3":"0.2","4":"gerbil","5":"0-2","6":"NA"},{"1":"C11","2":"Morris","3":"10.0","4":"cat","5":"5-8","6":"No"},{"1":"D9","2":"Winky","3":"11.0","4":"dog","5":"3-4","6":"No"},{"1":"C6","2":"Fido","3":"6.0","4":"cat","5":"5-8","6":"Yes"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We see that <code>name</code> and <code>animal</code> are stored as <code>factor</code>s and <code>age_category</code> is stored as an ordinal <code>factor</code>. Note that <code>name</code> has three levels ordered as <code>&quot;0-2&quot;</code>, <code>&quot;3-4&quot;</code>, and <code>&quot;5-8&quot;</code>.</p>
+</div>
+<div id="a-basic-barplot-using-geom_bar" class="section level2">
+<h2>A Basic Barplot using <code>geom_bar()</code></h2>
+<p>By default, the <code>geom_bar()</code> function counts the number of values with each factor level. Note that you don’t map to a y-aesthetic here, because the y values are the counts.</p>
+<p>Given this dataset, we might want to ask how many pets have the same name. What is the most popular name?</p>
+<pre class="r"><code>ggplot(data = pets, mapping = aes(x = name)) + 
+  geom_bar()</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="your-task" class="section level2">
+<h2>Your Task</h2>
+<p>Try mapping another variable to <code>fill</code> (try both <code>weight</code> and <code>animal</code>). Are the results what you expected?</p>
+<pre class="r"><code># Test out `weight` and `animal` here</code></pre>
+</div>
+<div id="faceting" class="section level2">
+<h2>Faceting</h2>
+<p>Say you have another <code>factor</code> variable and you want to stratify the plots based on that. You can do that by supplying the name of that variable as a facet. Here, we facet our barplot by <code>shots_current</code>.</p>
+<pre class="r"><code>ggplot(data = pets, mapping = aes(x = name)) + 
+  geom_bar() + 
+  ## have to specify facets using notation
+  facet_wrap(facets =~ shots_current) + 
+  ## we make the x axis x angled for better legibility
+  theme(axis.text.x = element_text(angle=45))</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>You might notice that there are blank spots for the categories in each facet. We can restrict the factors in each by using <code>scale = &quot;free_x&quot;</code> argument in <code>facet_wrap()</code>.</p>
+</div>
+<div id="your-task-1" class="section level2">
+<h2>Your Task</h2>
+<p>How many animals named “Morris” did not receive shots?</p>
+<p>What happens when you replace the <code>scale</code> argument with “free_y”?</p>
+<pre class="r"><code>ggplot(pets, aes(x = name)) + geom_bar() + 
+  facet_wrap(facets =~ shots_current, scale = &quot;free_x&quot;) +
+  theme(axis.text.x = element_text(angle = 45))</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="stacked-bars" class="section level2">
+<h2>Stacked Bars</h2>
+<p>Let’s see how many of each animal got shots. We can do this by mapping <code>shots_current</code> to <code>fill</code>.</p>
+<pre class="r"><code>#we map color (the outline of the plot) to black to make it look prettier
+ggplot(pets, aes(x = animal, fill = shots_current)) + 
+  geom_bar(color = &quot;black&quot;)</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="proportional-barchart" class="section level2">
+<h2>Proportional Barchart</h2>
+<p>We may only be interested in the relative proportions between the different categories. Visualizing this is useful for various 2 x 2 tests on proportions.</p>
+<p>What percent of dogs did not receive shots?</p>
+<pre class="r"><code>ggplot(pets, aes(x = animal,fill = shots_current)) + 
+  geom_bar(position = &quot;fill&quot;, color = &quot;black&quot;)</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="dodge-those-bars" class="section level2">
+<h2>Dodge those bars!</h2>
+<p>Instead of stacking, we can also dodge the bars (move the bars so they’re beside each other).</p>
+<pre class="r"><code>ggplot(pets, aes(x = animal, fill = shots_current)) + 
+  geom_bar(position = &quot;dodge&quot;, color = &quot;black&quot;)</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="your-task-bar-charts" class="section level2">
+<h2>Your Task: Bar Charts</h2>
+<p>Given the <code>pets</code> <code>data.frame</code>, plot a stacked proportional barchart that shows the age category counts by animal type. Is the proportion of animals receiving shots the same across each age category?</p>
+<p>Hints: think about what to map to <code>x</code>, and what to map to <code>fill</code>.</p>
+<p>Intermediate Folks: facet this plot by <code>shots_current</code>.</p>
+<pre class="r"><code># Space for your answer here.</code></pre>
+<pre class="r"><code># Intermediate: Space for your answer here.</code></pre>
+</div>
+<div id="boxplots" class="section level2">
+<h2>Boxplots</h2>
+<p>Boxplots allow us to assess distributions of a continuous variable conditioned on categorical variables.</p>
+<p>What does this tell us?</p>
+<pre class="r"><code>ggplot(pets, aes(x = shots_current, y = weight)) + 
+  geom_boxplot()</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="violin-plots" class="section level2">
+<h2>Violin Plots</h2>
+<p>Violin plots are another useful way to visualize the data. They provide a more nuanced look at the data. They’re a density plot that’s mirrored around the y-axis.</p>
+<pre class="r"><code>ggplot(pets, aes(x = age_category, y = weight, fill = age_category)) + 
+  geom_violin()</code></pre>
+<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="your-task-how-heavy-are-our-pets" class="section level2">
+<h2>Your task: How heavy are our pets?</h2>
+<p>Visualize <code>weight</code> by <code>animal</code> type as both a boxplot and a violin plot. What do you conclude? Which kind of animal weighs more on average than the other?</p>
+<p>Intermediate challenge: How would we plot both boxplots and a violin plot on the same graph?</p>
+<pre class="r"><code>## Space for your answer here</code></pre>
+<pre class="r"><code>## Intermediate: Space for your answer here</code></pre>
+</div>
+<div id="what-you-learned-in-this-section" class="section level2">
+<h2>What you learned in this section</h2>
+<ul>
+<li>Visualizing factor data</li>
+<li>Simple, stacked, stacked proportional, and dodged barplots</li>
+<li>Faceting a graph</li>
+<li>Boxplots and violin plots</li>
+</ul>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUGFydCAyIC0gV29ya2luZyB3aXRoIEZhY3RvcnMiCmF1dGhvcjogIlRlZCBMYWRlcmFzIgpkYXRlOiAiNS8xOC8yMDE3IgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgICBjb2RlX2ZvbGRpbmc6IGhpZGUKICAgIGRmX3ByaW50OiBwYWdlZAotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIG1lc3NhZ2UgPSBGQUxTRSkKYGBgCgpJbiB0aGlzIHNlY3Rpb24sIHdlJ2xsIGxlYXJuIHNvbWUgc2tpbGxzIGFib3V0IG1hbmlwdWxhdGluZyBmYWN0b3IgKGNhdGVnb3JpY2FsKSBkYXRhLgoKV2UnbGwgZG8gdGhpcyBieSBtYWtpbmcgYSBiYXIgcGxvdCBwcm9ncmVzc2l2ZWx5IG1ha2luZyBpdCBtb3JlIGNvbXBsZXguIFdlJ2xsIHRoZW4gZGl2ZSBpbnRvIGJveHBsb3RzLCBhIHdheSB0byB2aWV3IHRoZSBkaXN0cmlidXRpb24gb2YgYSB2YXJpYWJsZSBhY3Jvc3MgdGhlIGNhdGVnb3JpZXMgb2YgYSBkaWZmZXJlbnQgdmFyaWFibGUuCgojIyBSZXZpZXdpbmcgRmFjdG9ycyAKCkZhY3RvcnMgYXJlIGZyZXF1ZW50bHkgaG93IFIgcmVwcmVzZW50cyBjYXRlZ29yaWNhbCBkYXRhLgoKVGhlcmUgYXJlIHR3byBraW5kcyBvZiBmYWN0b3JzOiAKCisgYGZhY3RvcmAgLSB1c2VkIGZvciAqbm9taW5hbCogZGF0YSAoIkR1Y2tzIiwgIkNhdHMiLCAiRG9ncyIpYAorIGBvcmRlcmVkYC0gdXNlZCBmb3IgKm9yZGluYWwqIGRhdGEgKCIxMC0zMCIsIjMxLTQwIiwiNDEtNjAiKQoKV2UnbGwgbWFuaXB1bGF0ZSBvdXIgYmFycGxvdCBhbmQgYWRkIG1vcmUgaW5mb3JtYXRpb24gdXNpbmcgZmFjdG9ycy4KCkhlcmUncyB0aGUgc2ltcGxlIGRhdGFzZXQgd2UnbGwgdXNlIHRvIGludmVzdGlnYXRlIGhvdyB0byB3b3JrIHdpdGggZmFjdG9ycyBpbiBgZ2dwbG90YC4gSGVyZSB3ZSBhbHNvIGludHJvZHVjZSBob3cgdG8gcmVhZCBpbiBkYXRhIHN0b3JlZCBpbiBhbiBSIGRhdGEgZmlsZSAoYW4gUkRTKSBpbnRvIGEgZGF0YSBmcmFtZSBpbiBSLiBOb3RlIHRoZSBzaW1pbGFyaXRpZXMgd2l0aCByZWFkaW5nIGluIENTViBmaWxlcyAoYHJlYWRfcmRzKClgIHZlcnN1cyBgcmVhZF9jc3YoKWAuKQoKV2UgZGlzcGxheSB0aGUgYHBldHNgIGRhdGEgZnJhbWUgYnkgc2ltcGx5IHJ1bm5pbmcgdGhlIGxpbmUgY29udGFpbmluZyBgcGV0c2AuCgpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCnBldHMgPC0gcmVhZF9yZHMoImRhdGEvcGV0cy5yZHMiKQpwZXRzCmBgYAoKV2Ugc2VlIHRoYXQgYG5hbWVgIGFuZCBgYW5pbWFsYCBhcmUgc3RvcmVkIGFzIGBmYWN0b3JgcyBhbmQgYGFnZV9jYXRlZ29yeWAgaXMgc3RvcmVkIGFzIGFuIG9yZGluYWwgYGZhY3RvcmAuIE5vdGUgdGhhdCBgbmFtZWAgaGFzIHRocmVlIGxldmVscyBvcmRlcmVkIGFzIGAiMC0yImAsIGAiMy00ImAsIGFuZCBgIjUtOCJgLgoKIyMgQSBCYXNpYyBCYXJwbG90IHVzaW5nIGBnZW9tX2JhcigpYAoKQnkgZGVmYXVsdCwgdGhlIGBnZW9tX2JhcigpYCBmdW5jdGlvbiBjb3VudHMgdGhlIG51bWJlciBvZiB2YWx1ZXMgd2l0aCBlYWNoIGZhY3RvciBsZXZlbC4gTm90ZSB0aGF0IHlvdSBkb24ndCBtYXAgdG8gYSB5LWFlc3RoZXRpYyBoZXJlLCBiZWNhdXNlIHRoZSB5IHZhbHVlcyBhcmUgdGhlIGNvdW50cy4KCkdpdmVuIHRoaXMgZGF0YXNldCwgd2UgbWlnaHQgd2FudCB0byBhc2sgaG93IG1hbnkgcGV0cyBoYXZlIHRoZSBzYW1lIG5hbWUuIFdoYXQgaXMgdGhlIG1vc3QgcG9wdWxhciBuYW1lPwoKYGBge3J9CmdncGxvdChkYXRhID0gcGV0cywgbWFwcGluZyA9IGFlcyh4ID0gbmFtZSkpICsgCiAgZ2VvbV9iYXIoKQpgYGAKCiMjIFlvdXIgVGFzawoKVHJ5IG1hcHBpbmcgYW5vdGhlciB2YXJpYWJsZSB0byBgZmlsbGAgKHRyeSBib3RoIGB3ZWlnaHRgIGFuZCBgYW5pbWFsYCkuIEFyZSB0aGUgcmVzdWx0cyB3aGF0IHlvdSBleHBlY3RlZD8KCmBgYHtyfQojIFRlc3Qgb3V0IGB3ZWlnaHRgIGFuZCBgYW5pbWFsYCBoZXJlCgoKCmBgYAoKCiMjIEZhY2V0aW5nCgpTYXkgeW91IGhhdmUgYW5vdGhlciBgZmFjdG9yYCB2YXJpYWJsZSBhbmQgeW91IHdhbnQgdG8gc3RyYXRpZnkgdGhlIHBsb3RzIGJhc2VkIG9uIHRoYXQuIFlvdSBjYW4gZG8gdGhhdCBieSBzdXBwbHlpbmcgdGhlIG5hbWUgb2YgdGhhdCB2YXJpYWJsZSBhcyBhIGZhY2V0LiBIZXJlLCB3ZSBmYWNldCBvdXIgYmFycGxvdCBieSBgc2hvdHNfY3VycmVudGAuCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBuYW1lKSkgKyAKICBnZW9tX2JhcigpICsgCiAgIyMgaGF2ZSB0byBzcGVjaWZ5IGZhY2V0cyB1c2luZyBub3RhdGlvbgogIGZhY2V0X3dyYXAoZmFjZXRzID1+IHNob3RzX2N1cnJlbnQpICsgCiAgIyMgd2UgbWFrZSB0aGUgeCBheGlzIHggYW5nbGVkIGZvciBiZXR0ZXIgbGVnaWJpbGl0eQogIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGFuZ2xlPTQ1KSkKYGBgCgpZb3UgbWlnaHQgbm90aWNlIHRoYXQgdGhlcmUgYXJlIGJsYW5rIHNwb3RzIGZvciB0aGUgY2F0ZWdvcmllcyBpbiBlYWNoIGZhY2V0LiBXZSBjYW4gcmVzdHJpY3QgdGhlIGZhY3RvcnMgaW4gZWFjaCBieSB1c2luZyBgc2NhbGUgPSAiZnJlZV94ImAgYXJndW1lbnQgaW4gYGZhY2V0X3dyYXAoKWAuCgojIyBZb3VyIFRhc2sKCkhvdyBtYW55IGFuaW1hbHMgbmFtZWQgIk1vcnJpcyIgZGlkIG5vdCByZWNlaXZlIHNob3RzPwoKYGBge3J9CgpgYGAKCgpXaGF0IGhhcHBlbnMgd2hlbiB5b3UgcmVwbGFjZSB0aGUgYHNjYWxlYCBhcmd1bWVudCB3aXRoICJmcmVlX3kiPwoKYGBge3J9CmdncGxvdChwZXRzLCBhZXMoeCA9IG5hbWUpKSArIGdlb21fYmFyKCkgKyAKICBmYWNldF93cmFwKGZhY2V0cyA9fiBzaG90c19jdXJyZW50LCBzY2FsZSA9ICJmcmVlX3giKSArCiAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA0NSkpCmBgYAoKIyMgU3RhY2tlZCBCYXJzCgpMZXQncyBzZWUgaG93IG1hbnkgb2YgZWFjaCBhbmltYWwgZ290IHNob3RzLiBXZSBjYW4gZG8gdGhpcyBieSBtYXBwaW5nIGBzaG90c19jdXJyZW50YCB0byBgZmlsbGAuCgpgYGB7cn0KI3dlIG1hcCBjb2xvciAodGhlIG91dGxpbmUgb2YgdGhlIHBsb3QpIHRvIGJsYWNrIHRvIG1ha2UgaXQgbG9vayBwcmV0dGllcgpnZ3Bsb3QocGV0cywgYWVzKHggPSBhbmltYWwsIGZpbGwgPSBzaG90c19jdXJyZW50KSkgKyAKICBnZW9tX2Jhcihjb2xvciA9ICJibGFjayIpCmBgYAoKIyMgUHJvcG9ydGlvbmFsIEJhcmNoYXJ0CgpXZSBtYXkgb25seSBiZSBpbnRlcmVzdGVkIGluIHRoZSByZWxhdGl2ZSBwcm9wb3J0aW9ucyBiZXR3ZWVuIHRoZSBkaWZmZXJlbnQgY2F0ZWdvcmllcy4gVmlzdWFsaXppbmcgdGhpcyBpcyB1c2VmdWwgZm9yIHZhcmlvdXMgMiB4IDIgdGVzdHMgb24gcHJvcG9ydGlvbnMuCgpXaGF0IHBlcmNlbnQgb2YgZG9ncyBkaWQgbm90IHJlY2VpdmUgc2hvdHM/CgpgYGB7cn0KZ2dwbG90KHBldHMsIGFlcyh4ID0gYW5pbWFsLGZpbGwgPSBzaG90c19jdXJyZW50KSkgKyAKICBnZW9tX2Jhcihwb3NpdGlvbiA9ICJmaWxsIiwgY29sb3IgPSAiYmxhY2siKQpgYGAKCiMjIERvZGdlIHRob3NlIGJhcnMhCgpJbnN0ZWFkIG9mIHN0YWNraW5nLCB3ZSBjYW4gYWxzbyBkb2RnZSB0aGUgYmFycyAobW92ZSB0aGUgYmFycyBzbyB0aGV5J3JlIGJlc2lkZSBlYWNoIG90aGVyKS4KCmBgYHtyfQpnZ3Bsb3QocGV0cywgYWVzKHggPSBhbmltYWwsIGZpbGwgPSBzaG90c19jdXJyZW50KSkgKyAKICBnZW9tX2Jhcihwb3NpdGlvbiA9ICJkb2RnZSIsIGNvbG9yID0gImJsYWNrIikKYGBgCgojIyBZb3VyIFRhc2s6IEJhciBDaGFydHMKCkdpdmVuIHRoZSBgcGV0c2AgYGRhdGEuZnJhbWVgLCBwbG90IGEgc3RhY2tlZCBwcm9wb3J0aW9uYWwgYmFyY2hhcnQgdGhhdCBzaG93cyB0aGUgYWdlIGNhdGVnb3J5IGNvdW50cyBieSBhbmltYWwgdHlwZS4gSXMgdGhlIHByb3BvcnRpb24gb2YgYW5pbWFscyByZWNlaXZpbmcgc2hvdHMgdGhlIHNhbWUgYWNyb3NzIGVhY2ggYWdlIGNhdGVnb3J5PwoKSGludHM6IHRoaW5rIGFib3V0IHdoYXQgdG8gbWFwIHRvIGB4YCwgYW5kIHdoYXQgdG8gbWFwIHRvIGBmaWxsYC4KCkludGVybWVkaWF0ZSBGb2xrczogZmFjZXQgdGhpcyBwbG90IGJ5IGBzaG90c19jdXJyZW50YC4gCgpgYGB7cn0KIyBTcGFjZSBmb3IgeW91ciBhbnN3ZXIgaGVyZS4KCmBgYAoKYGBge3J9CiMgSW50ZXJtZWRpYXRlOiBTcGFjZSBmb3IgeW91ciBhbnN3ZXIgaGVyZS4KCmBgYAoKCiMjIEJveHBsb3RzCgpCb3hwbG90cyBhbGxvdyB1cyB0byBhc3Nlc3MgZGlzdHJpYnV0aW9ucyBvZiBhIGNvbnRpbnVvdXMgdmFyaWFibGUgY29uZGl0aW9uZWQgb24gY2F0ZWdvcmljYWwgdmFyaWFibGVzLgoKV2hhdCBkb2VzIHRoaXMgdGVsbCB1cz8gCgpgYGB7cn0KZ2dwbG90KHBldHMsIGFlcyh4ID0gc2hvdHNfY3VycmVudCwgeSA9IHdlaWdodCkpICsgCiAgZ2VvbV9ib3hwbG90KCkKYGBgCgojIyBWaW9saW4gUGxvdHMKClZpb2xpbiBwbG90cyBhcmUgYW5vdGhlciB1c2VmdWwgd2F5IHRvIHZpc3VhbGl6ZSB0aGUgZGF0YS4gVGhleSBwcm92aWRlIGEgbW9yZSBudWFuY2VkIGxvb2sgYXQgdGhlIGRhdGEuIFRoZXkncmUgYSBkZW5zaXR5IHBsb3QgdGhhdCdzIG1pcnJvcmVkIGFyb3VuZCB0aGUgeS1heGlzLgoKYGBge3J9CmdncGxvdChwZXRzLCBhZXMoeCA9IGFnZV9jYXRlZ29yeSwgeSA9IHdlaWdodCwgZmlsbCA9IGFnZV9jYXRlZ29yeSkpICsgCiAgZ2VvbV92aW9saW4oKQpgYGAKCiMjIFlvdXIgdGFzazogSG93IGhlYXZ5IGFyZSBvdXIgcGV0cz8KClZpc3VhbGl6ZSBgd2VpZ2h0YCBieSBgYW5pbWFsYCB0eXBlIGFzIGJvdGggYSBib3hwbG90IGFuZCBhIHZpb2xpbiBwbG90LiBXaGF0IGRvIHlvdSBjb25jbHVkZT8gV2hpY2gga2luZCBvZiBhbmltYWwgd2VpZ2hzIG1vcmUgb24gYXZlcmFnZSB0aGFuIHRoZSBvdGhlcj8KCkludGVybWVkaWF0ZSBjaGFsbGVuZ2U6IEhvdyB3b3VsZCB3ZSBwbG90IGJvdGggYm94cGxvdHMgYW5kIGEgdmlvbGluIHBsb3Qgb24gdGhlIHNhbWUgZ3JhcGg/CgpgYGB7cn0KIyMgU3BhY2UgZm9yIHlvdXIgYW5zd2VyIGhlcmUKCmBgYAoKYGBge3J9CiMjIEludGVybWVkaWF0ZTogU3BhY2UgZm9yIHlvdXIgYW5zd2VyIGhlcmUKCmBgYAoKCiMjIFdoYXQgeW91IGxlYXJuZWQgaW4gdGhpcyBzZWN0aW9uCgotIFZpc3VhbGl6aW5nIGZhY3RvciBkYXRhCi0gU2ltcGxlLCBzdGFja2VkLCBzdGFja2VkIHByb3BvcnRpb25hbCwgYW5kIGRvZGdlZCBiYXJwbG90cyAKLSBGYWNldGluZyBhIGdyYXBoCi0gQm94cGxvdHMgYW5kIHZpb2xpbiBwbG90cw==</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
