@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Chester Ismay" />
+
+
+<title>Part 1 - Intro to the gRammar of gRaphics with ggplot2</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Part1-ggplot2_intro.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Cascadia R 2018 - Data Viz workshop</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Part1-ggplot2_intro.html">Part 1</a>
+</li>
+<li>
+  <a href="Part2-working_with_factors.html">Part 2</a>
+</li>
+<li>
+  <a href="Part3-interactive_plots.html">Part 3</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Part 1 - Intro to the gRammar of gRaphics with <code>ggplot2</code></h1>
+<h4 class="author"><em>Chester Ismay</em></h4>
+
+</div>
+
+
+<p>In this section, we’ll discuss the Grammar of Graphics developed by <a href="http://www.powells.com/book/the-grammar-of-graphics-9780387245447">Leland Wilkinson</a> and implemented in R via <a href="http://www.powells.com/book/ggplot2-elegant-graphics-for-data-analysis-9783319242750/68-428">Hadley Wickham</a>. We’ll see how this is applied to a scatterplot with and without a regression line. These ideas will then be extended in Part 2 of the workshop.</p>
+<div id="the-grammar-of-graphics" class="section level2">
+<h2>The Grammar of Graphics</h2>
+<div class="figure">
+<img src="figs/gapminder.png" />
+
+</div>
+<ul>
+<li>What are the variables here?</li>
+<li>What is the observational unit?
+<ul>
+<li>i.e., what is the THING being measured?</li>
+</ul></li>
+<li>How are the variables mapped to aesthetics?</li>
+</ul>
+<hr />
+</div>
+<div id="what-is-a-statistical-graphic" class="section level2">
+<h2>What is a statistical graphic?</h2>
+<div id="a-mapping-of-data-variables" class="section level3">
+<h3>A <code>mapping</code> of <code>data</code> variables</h3>
+</div>
+<div id="to-aesthetic-attributes" class="section level3">
+<h3>to <code>aes()</code>thetic attributes</h3>
+</div>
+<div id="of-geom_etric-objects." class="section level3">
+<h3>of <code>geom_</code>etric objects.</h3>
+<hr />
+<p><strong>Back to basics</strong></p>
+<p>Consider the following data in tidy format:</p>
+<ul>
+<li>Sketch the graphics below on paper, where the <code>x</code>-axis is variable <code>A</code> and the <code>y</code>-axis is variable <code>B</code></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>A scatterplot</li>
+<li>A scatterplot with fitted least-squares regression line</li>
+</ol>
+<p>Intermediate folks:</p>
+<ul>
+<li><ol start="3" style="list-style-type: decimal">
+<li>A scatter plot where the <code>color</code> of the points corresponds to <code>D</code> and the <code>size</code> of the points corresponds to <code>C</code></li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Only show a regression line of color “goldenrod” (no points and also no error bounds)</li>
+</ol></li>
+</ul>
+<hr />
+<ol style="list-style-type: decimal">
+<li>A scatterplot</li>
+</ol>
+<pre class="r"><code>ggplot(data = simple_ex, mapping = aes(x = A, y = B)) + 
+  geom_point()</code></pre>
+<p><img src="Part1-ggplot2_intro_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>A scatterplot with fitted least-squares regression line</li>
+</ol>
+<pre class="r"><code>ggplot(data = simple_ex, mapping = aes(x = A, y = B)) + 
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE)</code></pre>
+<p><img src="Part1-ggplot2_intro_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><strong>Intermediate</strong></p>
+<ol start="3" style="list-style-type: decimal">
+<li>A scatter plot where the <code>color</code> of the points corresponds to <code>D</code> and the <code>size</code> of the points corresponds to <code>C</code></li>
+</ol>
+<pre class="r"><code>ggplot(data = simple_ex, mapping = aes(x = A, y = B)) + 
+  geom_point(mapping = aes(color = D, size = C))</code></pre>
+<p><img src="Part1-ggplot2_intro_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Only show a regression line of color “goldenrod” (no points and also no error bounds). Here <code>&quot;lm&quot;</code> stands for “linear model.”</li>
+</ol>
+<pre class="r"><code>ggplot(data = simple_ex, mapping = aes(x = A, y = B)) + 
+  geom_smooth(method = &quot;lm&quot;, se = FALSE, color = &quot;goldenrod&quot;)</code></pre>
+<p><img src="Part1-ggplot2_intro_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<hr />
+</div>
+</div>
+<div id="your-task" class="section level2">
+<h2>Your Task</h2>
+<p>Recreate the gapminder plot shown at the beginning of this workshop (and below) using <code>ggplot2</code> and the <code>gapminder</code> data frame in the <code>gapminder</code> package. The <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">Data Visualization Cheat Sheet</a> from <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio</a> may be helpful.</p>
+<p><strong>Note</strong>: To focus on only the rows in the data frame corresponding to 1992 we’ve created a dataset and saved the file as a CSV (basic spreadsheet) file in the <code>data</code> folder. Recall from this morning’s workshop, the <code>filter</code> function from <code>dplyr</code> can be used to perform this. (Try on your own to do this if you wish!)</p>
+<div class="figure">
+<img src="figs/gapminder.png" />
+
+</div>
+<pre class="r"><code>library(gapminder)
+gap1992 &lt;- read_csv(&quot;data/gap1992.csv&quot;)
+
+#Space for your answer here.</code></pre>
+</div>
+<div id="what-you-learned-in-this-section" class="section level2">
+<h2>What you learned in this section</h2>
+<ul>
+<li>Identifying plot aesthetics</li>
+<li>Mapping data variables to aesthetics using the Grammar of Graphics</li>
+<li>Applying a line of best fit to a scatterplot</li>
+<li>Using transformations on your data and labeling your axes</li>
+</ul>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUGFydCAxIC0gSW50cm8gdG8gdGhlIGdSYW1tYXIgb2YgZ1JhcGhpY3Mgd2l0aCBgZ2dwbG90MmAiCmF1dGhvcjogIkNoZXN0ZXIgSXNtYXkiCm91dHB1dDogCiAgaHRtbF9kb2N1bWVudDoKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKICAgIGNvZGVfZm9sZGluZzogaGlkZQotLS0KCkluIHRoaXMgc2VjdGlvbiwgd2UnbGwgZGlzY3VzcyB0aGUgR3JhbW1hciBvZiBHcmFwaGljcyBkZXZlbG9wZWQgYnkgW0xlbGFuZCBXaWxraW5zb25dKGh0dHA6Ly93d3cucG93ZWxscy5jb20vYm9vay90aGUtZ3JhbW1hci1vZi1ncmFwaGljcy05NzgwMzg3MjQ1NDQ3KSBhbmQgaW1wbGVtZW50ZWQgaW4gUiB2aWEgW0hhZGxleSBXaWNraGFtXShodHRwOi8vd3d3LnBvd2VsbHMuY29tL2Jvb2svZ2dwbG90Mi1lbGVnYW50LWdyYXBoaWNzLWZvci1kYXRhLWFuYWx5c2lzLTk3ODMzMTkyNDI3NTAvNjgtNDI4KS4gIFdlJ2xsIHNlZSBob3cgdGhpcyBpcyBhcHBsaWVkIHRvIGEgc2NhdHRlcnBsb3Qgd2l0aCBhbmQgd2l0aG91dCBhIHJlZ3Jlc3Npb24gbGluZS4gIFRoZXNlIGlkZWFzIHdpbGwgdGhlbiBiZSBleHRlbmRlZCBpbiBQYXJ0IDIgb2YgdGhlIHdvcmtzaG9wLgoKIyMgVGhlIEdyYW1tYXIgb2YgR3JhcGhpY3MKCiFbXShmaWdzL2dhcG1pbmRlci5wbmcpCgotIFdoYXQgYXJlIHRoZSB2YXJpYWJsZXMgaGVyZT8KLSBXaGF0IGlzIHRoZSBvYnNlcnZhdGlvbmFsIHVuaXQ/CiAgICAtIGkuZS4sIHdoYXQgaXMgdGhlIFRISU5HIGJlaW5nIG1lYXN1cmVkPwotIEhvdyBhcmUgdGhlIHZhcmlhYmxlcyBtYXBwZWQgdG8gYWVzdGhldGljcz8KCi0tLQoKIyMgV2hhdCBpcyBhIHN0YXRpc3RpY2FsIGdyYXBoaWM/CgoKIyMjIEEgYG1hcHBpbmdgIG9mIGBkYXRhYCB2YXJpYWJsZXMKCiMjIyB0byBgYWVzKClgdGhldGljIGF0dHJpYnV0ZXMKCiMjIyBvZiBgZ2VvbV9gZXRyaWMgb2JqZWN0cy4KCi0tLQoKKipCYWNrIHRvIGJhc2ljcyoqCgpDb25zaWRlciB0aGUgZm9sbG93aW5nIGRhdGEgaW4gdGlkeSBmb3JtYXQ6CgpgYGB7ciBpbmNsdWRlPUZBTFNFfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKCnNpbXBsZV9leCA8LSBkYXRhX2ZyYW1lKAogICAgQSA9IGMoMTk4MCwgMTk5MCwgMjAwMCwgMjAxMCksCiAgICBCID0gYygxLCAyLCA0LCA1KSwKICAgIEMgPSBjKDMsIDIsIDEsIDIpLAogICAgRCA9IGMoImNvbGQiLCAiY29sZCIsICJob3QiLCAiaG90IikKICApCnNpbXBsZV9leApgYGAKCi0gU2tldGNoIHRoZSBncmFwaGljcyBiZWxvdyBvbiBwYXBlciwgd2hlcmUgdGhlIGB4YC1heGlzIGlzIHZhcmlhYmxlIGBBYCBhbmQgdGhlIGB5YC1heGlzIGlzIHZhcmlhYmxlIGBCYAoKMS4gQSBzY2F0dGVycGxvdAoxLiBBIHNjYXR0ZXJwbG90IHdpdGggZml0dGVkIGxlYXN0LXNxdWFyZXMgcmVncmVzc2lvbiBsaW5lIAoKSW50ZXJtZWRpYXRlIGZvbGtzOgoKLSAzLiBBIHNjYXR0ZXIgcGxvdCB3aGVyZSB0aGUgYGNvbG9yYCBvZiB0aGUgcG9pbnRzIGNvcnJlc3BvbmRzIHRvIGBEYCBhbmQgdGhlIGBzaXplYCBvZiB0aGUgcG9pbnRzIGNvcnJlc3BvbmRzIHRvIGBDYAotIDQuIE9ubHkgc2hvdyBhIHJlZ3Jlc3Npb24gbGluZSBvZiBjb2xvciAiZ29sZGVucm9kIiAobm8gcG9pbnRzIGFuZCBhbHNvIG5vIGVycm9yIGJvdW5kcykKCgotLS0KCjEuIEEgc2NhdHRlcnBsb3QKCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHNpbXBsZV9leCwgbWFwcGluZyA9IGFlcyh4ID0gQSwgeSA9IEIpKSArIAogIGdlb21fcG9pbnQoKQpgYGAKCjIuIEEgc2NhdHRlcnBsb3Qgd2l0aCBmaXR0ZWQgbGVhc3Qtc3F1YXJlcyByZWdyZXNzaW9uIGxpbmUgCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBzaW1wbGVfZXgsIG1hcHBpbmcgPSBhZXMoeCA9IEEsIHkgPSBCKSkgKyAKICBnZW9tX3BvaW50KCkgKwogIGdlb21fc21vb3RoKG1ldGhvZCA9ICJsbSIsIHNlID0gRkFMU0UpCmBgYAoKCioqSW50ZXJtZWRpYXRlKioKCjMuIEEgc2NhdHRlciBwbG90IHdoZXJlIHRoZSBgY29sb3JgIG9mIHRoZSBwb2ludHMgY29ycmVzcG9uZHMgdG8gYERgIGFuZCB0aGUgYHNpemVgIG9mIHRoZSBwb2ludHMgY29ycmVzcG9uZHMgdG8gYENgCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBzaW1wbGVfZXgsIG1hcHBpbmcgPSBhZXMoeCA9IEEsIHkgPSBCKSkgKyAKICBnZW9tX3BvaW50KG1hcHBpbmcgPSBhZXMoY29sb3IgPSBELCBzaXplID0gQykpCmBgYAoKCjQuIE9ubHkgc2hvdyBhIHJlZ3Jlc3Npb24gbGluZSBvZiBjb2xvciAiZ29sZGVucm9kIiAobm8gcG9pbnRzIGFuZCBhbHNvIG5vIGVycm9yIGJvdW5kcykuIEhlcmUgYCJsbSJgIHN0YW5kcyBmb3IgImxpbmVhciBtb2RlbC4iCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBzaW1wbGVfZXgsIG1hcHBpbmcgPSBhZXMoeCA9IEEsIHkgPSBCKSkgKyAKICBnZW9tX3Ntb290aChtZXRob2QgPSAibG0iLCBzZSA9IEZBTFNFLCBjb2xvciA9ICJnb2xkZW5yb2QiKQpgYGAKCi0tLQoKIyMgWW91ciBUYXNrCgpSZWNyZWF0ZSB0aGUgZ2FwbWluZGVyIHBsb3Qgc2hvd24gYXQgdGhlIGJlZ2lubmluZyBvZiB0aGlzIHdvcmtzaG9wIChhbmQgYmVsb3cpIHVzaW5nIGBnZ3Bsb3QyYCBhbmQgdGhlIGBnYXBtaW5kZXJgIGRhdGEgZnJhbWUgaW4gdGhlIGBnYXBtaW5kZXJgIHBhY2thZ2UuICBUaGUgW0RhdGEgVmlzdWFsaXphdGlvbiBDaGVhdCBTaGVldF0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vY2hlYXRzaGVldHMvcmF3L21hc3Rlci9kYXRhLXZpc3VhbGl6YXRpb24tMi4xLnBkZikgZnJvbSBbUlN0dWRpb10oaHR0cHM6Ly93d3cucnN0dWRpby5jb20vcmVzb3VyY2VzL2NoZWF0c2hlZXRzLykgbWF5IGJlIGhlbHBmdWwuICAKCioqTm90ZSoqOiAgVG8gZm9jdXMgb24gb25seSB0aGUgcm93cyBpbiB0aGUgZGF0YSBmcmFtZSBjb3JyZXNwb25kaW5nIHRvIDE5OTIgd2UndmUgY3JlYXRlZCBhIGRhdGFzZXQgYW5kIHNhdmVkIHRoZSBmaWxlIGFzIGEgQ1NWIChiYXNpYyBzcHJlYWRzaGVldCkgZmlsZSBpbiB0aGUgYGRhdGFgIGZvbGRlci4gUmVjYWxsIGZyb20gdGhpcyBtb3JuaW5nJ3Mgd29ya3Nob3AsIHRoZSBgZmlsdGVyYCBmdW5jdGlvbiBmcm9tIGBkcGx5cmAgY2FuIGJlIHVzZWQgdG8gcGVyZm9ybSB0aGlzLiAoVHJ5IG9uIHlvdXIgb3duIHRvIGRvIHRoaXMgaWYgeW91IHdpc2ghKQoKIVtdKGZpZ3MvZ2FwbWluZGVyLnBuZykKCmBgYHtyfQpsaWJyYXJ5KGdhcG1pbmRlcikKZ2FwMTk5MiA8LSByZWFkX2NzdigiZGF0YS9nYXAxOTkyLmNzdiIpCgojU3BhY2UgZm9yIHlvdXIgYW5zd2VyIGhlcmUuCgpgYGAKCiMjIFdoYXQgeW91IGxlYXJuZWQgaW4gdGhpcyBzZWN0aW9uCgotIElkZW50aWZ5aW5nIHBsb3QgYWVzdGhldGljcwotIE1hcHBpbmcgZGF0YSB2YXJpYWJsZXMgdG8gYWVzdGhldGljcyB1c2luZyB0aGUgR3JhbW1hciBvZiBHcmFwaGljcyAKLSBBcHBseWluZyBhIGxpbmUgb2YgYmVzdCBmaXQgdG8gYSBzY2F0dGVycGxvdAotIFVzaW5nIHRyYW5zZm9ybWF0aW9ucyBvbiB5b3VyIGRhdGEgYW5kIGxhYmVsaW5nIHlvdXIgYXhlcw==</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
