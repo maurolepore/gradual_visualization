@@ -1,7 +1,6 @@
 ---
 title: A gRadual intRoduction to data visualization
 author: Chester Ismay and Ted Laderas
-output: github_document
 ---
 
 Welcome! This is a workshop for the Cascadia R conference that is meant to be a gentle introduction to data visualization using the `ggplot2` and the `plotly` packages. 
@@ -15,23 +14,22 @@ Please make sure to have this completed prior to the workshop beginning. To part
 
 1. Have the latest version of R AND RStudio installed ([Directions are here](http://moderndive.netlify.com/2-getting-started.html#what-are-r-and-rstudio))
 2. Be familiar with the [basics of the RStudio Interface](https://ismayc.github.io/rbasics-book/3-rstudiobasics.html#rstudio-layout)
-3. Have the following R packages installed:
-    - `tidyverse`, `plotly`, `gapminder`, and `fivethirtyeight`
+3. Have the following R packages installed: `tidyverse`, `plotly`, `gapminder`, and `fivethirtyeight`
 
-This can be accomplished by copying the following code into the *Console* in RStudio and pressing Enter. Note that you'll see quite a few lines of code run while the packages are installing. Don't be alarmed. After all four of these packages are installed you should see them listed in the Packages tab in the bottom right section of RStudio.
+    This can be accomplished by copying the following code into the *Console* in RStudio and pressing Enter. Note that you'll see quite a few lines of code run while the packages are installing. Don't be alarmed. After all four of these packages are installed you should see them listed in the Packages tab in the bottom right section of RStudio.
 
-```
-install.packages(c("tidyverse", "plotly", "gapminder", "fivethirtyeight"))
-```
+    ```
+    install.packages(c("tidyverse", "plotly", "gapminder", "fivethirtyeight"))
+    ```
     
-- The [`tidyverse`](http://tidyverse.tidyverse.org/) package installs a variety of different packages that will be useful in your analysis including the [`ggplot2`](https://ggplot2.tidyverse.org/) package that will be the focus of this workshop. 
-- The [`plotly`](https://plotly-book.cpsievert.me/) package will be used for interactive graphics. 
-- The [`gapminder`](https://github.com/jennybc/gapminder/blob/master/README.md) package contains a data set made famous by Hans Rosling exploring data on the world's countries.
-- The [`fivethirtyeight`](http://fivethirtyeight-r.netlify.com/) package contains many datasets used by data journalists at FiveThirtyEight.com.
+    - The [`tidyverse`](http://tidyverse.tidyverse.org/) package installs a variety of different packages that will be useful in your analysis including the [`ggplot2`](https://ggplot2.tidyverse.org/) package that will be the focus of this workshop. 
+    - The [`plotly`](https://plotly-book.cpsievert.me/) package will be used for interactive graphics. 
+    - The [`gapminder`](https://github.com/jennybc/gapminder/blob/master/README.md) package contains a data set made famous by Hans Rosling exploring data on the world's countries.
+    - The [`fivethirtyeight`](http://fivethirtyeight-r.netlify.com/) package contains many datasets used by data journalists at FiveThirtyEight.com.
 
 ## IMPORTANT FINAL STEP
 
-- Download the conference materials as a [ZIP file](https://github.com/tidyverse-intro/gradual_visualization/archive/master.zip) and extract the files there as a folder on your computer. Double click on the **gradual_visualization.Rproj** file in that folder to open up an RStudio project containing the files needed for the workshop.  
+- Download the conference materials as a [ZIP file](https://github.com/tidyverse-intro/gradual_visualization/archive/master.zip) and extract the files there as a folder on your computer. Note the importance of actually extracting all the files to a folder. Double click on the **gradual_visualization.Rproj** file in that folder to open up an RStudio project containing the files needed for the workshop.  
 
 You'll be following along in the **Part1-ggplot2_intro.Rmd**, **Part2-working_with_factors.Rmd**, and **Part3-interactive_plots.Rmd** files, running the R code in the "chunks" there, and writing your own code to practice.
     
