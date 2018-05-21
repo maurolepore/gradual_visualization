@@ -1,0 +1,13 @@
+name: "gRadual Data Visualization"
+output_dir: "docs"
+navbar:
+  title: "Cascadia R 2018 - Data Viz workshop"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Part 1"
+      href: Part1-ggplot2_intro.html
+    - text: "Part 2"
+      href: Part2-working_with_factors.html     
+    - text: "Part 3"
+      href: Part3-interactive_plots.html      
