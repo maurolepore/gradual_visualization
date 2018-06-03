@@ -12,7 +12,7 @@
 <meta name="author" content="Ted Laderas" />
 
 
-<title>Part 2 - Working with Factors</title>
+<title>Part 2 - Working with Factors SOLUTIONS</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -172,8 +172,8 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Part2-working_with_factors.Rmd");
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeSourceEmbed("Part2-working_with_factors_SOLUTIONS.Rmd");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -237,7 +237,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Part 2 - Working with Factors</h1>
+<h1 class="title toc-ignore">Part 2 - Working with Factors SOLUTIONS</h1>
 <h4 class="author"><em>Ted Laderas</em></h4>
 <h4 class="date"><em>5/18/2017</em></h4>
 
@@ -273,12 +273,20 @@ pets</code></pre>
 <p>Given this dataset, we might want to ask how many pets have the same name. What is the most popular name?</p>
 <pre class="r"><code>ggplot(data = pets, mapping = aes(x = name)) + 
   geom_bar()</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="your-task" class="section level2">
 <h2>Your Task</h2>
 <p>Try mapping another variable to <code>fill</code> (try both <code>weight</code> and <code>animal</code>). Are the results what you expected?</p>
-<pre class="r"><code># Test out `weight` and `animal` here</code></pre>
+<pre class="r"><code># Test out `weight` and `animal` here
+
+# ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = name, fill = animal)) +
+  geom_bar()</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = pets, mapping = aes(x = name, fill = weight)) +
+  geom_bar()</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 </div>
 <div id="faceting" class="section level2">
 <h2>Faceting</h2>
@@ -289,7 +297,7 @@ pets</code></pre>
   facet_wrap(facets = ~ shots_current) + 
   ## we make the x axis x angled for better legibility
   theme(axis.text.x = element_text(angle = 90))</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>You might notice that there are blank spots for the categories in each facet. We can restrict the factors in each by using <code>scale = &quot;free_x&quot;</code> argument in <code>facet_wrap()</code>.</p>
 <pre class="r"><code>ggplot(data = pets, mapping = aes(x = name)) + 
   geom_bar() + 
@@ -297,17 +305,23 @@ pets</code></pre>
   facet_wrap(facets = ~ shots_current, scale = &quot;free_x&quot;) + 
   ## we make the x axis x angled for better legibility
   theme(axis.text.x = element_text(angle = 90))</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="your-task-1" class="section level2">
 <h2>Your Task</h2>
 <p>How many animals named “Morris” did not receive shots?</p>
+<pre class="r"><code># ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = name)) + 
+  geom_bar() + 
+  facet_wrap(facets = ~ shots_current) +
+  theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>What happens when you replace the <code>scale</code> argument with <code>&quot;free_y&quot;</code>?</p>
 <pre class="r"><code>ggplot(data = pets, mapping = aes(x = name)) + 
   geom_bar() + 
   facet_wrap(facets = ~ shots_current, scale = &quot;free_y&quot;) +
   theme(axis.text.x = element_text(angle = 90))</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <div id="whats-up-with-this-in-the-facets" class="section level3">
 <h3>What’s up with this <code>~</code> in the <code>facets</code>?</h3>
 <p>This is known as formula notation and might make a little more sense if we explore how to create a grid of smaller plots across two different variables. Note that <code>animal</code> appears on the vertical <code>y</code> axis and <code>shots_current</code> goes on the horizontal <code>x</code> axis. This is how to read this <code>~</code> in most settings in R.</p>
@@ -315,7 +329,7 @@ pets</code></pre>
   geom_bar() + 
   facet_grid(facets = animal ~ shots_current) +
   theme(axis.text.x = element_text(angle = 90))</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 </div>
 <div id="stacked-bars" class="section level2">
@@ -326,7 +340,7 @@ pets</code></pre>
 # mapping an aesthetic to a variable but rather just changing the setting.
 ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) + 
   geom_bar(color = &quot;black&quot;)</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="proportional-barchart" class="section level2">
 <h2>Proportional Barchart</h2>
@@ -334,45 +348,78 @@ ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) +
 <p>What percent of dogs did not receive shots?</p>
 <pre class="r"><code>ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) + 
   geom_bar(position = &quot;fill&quot;, color = &quot;black&quot;)</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="dodge-those-bars" class="section level2">
 <h2>Dodge those bars!</h2>
 <p>Instead of stacking, we can also dodge the bars (move the bars so they’re beside each other).</p>
 <pre class="r"><code>ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) + 
   geom_bar(position = &quot;dodge&quot;, color = &quot;black&quot;)</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="dodge-those-bars-1" class="section level2">
+<h2>Dodge those bars!</h2>
+<p>Instead of stacking, we can also dodge the bars (move the bars so they’re beside each other).</p>
+<pre class="r"><code>ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) + 
+  geom_bar(position = &quot;dodge&quot;, color = &quot;black&quot;)</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="your-task-bar-charts" class="section level2">
 <h2>Your Task: Bar Charts</h2>
 <p>Given the <code>pets</code> <code>data.frame</code>, plot a stacked proportional barchart that shows age category by shots being current. Is the proportion of animals receiving shots the same across each age category?</p>
 <p>Hints: think about what to map to <code>x</code>, and what to map to <code>fill</code>.</p>
+<pre class="r"><code># ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = age_category, fill = shots_current)) +
+  geom_bar(position = &quot;fill&quot;, color = &quot;black&quot;)</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Intermediate Folks: facet this plot by <code>animal</code>.</p>
-<pre class="r"><code># Space for your answer here.</code></pre>
-<pre class="r"><code># Intermediate: Space for your answer here.</code></pre>
+<pre class="r"><code># Intermediate: Space for your answer here.
+
+# ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = age_category, fill = shots_current)) +
+  geom_bar(position = &quot;fill&quot;, color = &quot;black&quot;) +
+  facet_wrap(facets = ~ animal)</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="boxplots" class="section level2">
 <h2>Boxplots</h2>
 <p>Boxplots allow us to assess distributions of a continuous variable conditioned on categorical variables.</p>
 <p>What does this tell us?</p>
-<pre class="r"><code>ggplot(pets, aes(x = shots_current, y = weight)) + 
+<pre class="r"><code>ggplot(data = pets, mapping = aes(x = shots_current, y = weight)) + 
   geom_boxplot()</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="violin-plots" class="section level2">
 <h2>Violin Plots</h2>
 <p>Violin plots are another useful way to visualize the data. They provide a more nuanced look at the data. They’re a density plot that’s mirrored around the y-axis.</p>
-<pre class="r"><code>ggplot(pets, aes(x = age_category, y = weight, fill = age_category)) + 
+<pre class="r"><code>ggplot(data = pets, 
+       mapping = aes(x = age_category, y = weight, fill = age_category)) + 
   geom_violin()</code></pre>
-<p><img src="Part2-working_with_factors_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 <div id="your-task-how-heavy-are-our-pets" class="section level2">
 <h2>Your task: How heavy are our pets?</h2>
 <p>Visualize <code>weight</code> by <code>animal</code> type as both a boxplot and a violin plot. What do you conclude? Which kind of animal weighs more on average than the other?</p>
 <p>Note that the horizontal axis needs to correspond to the categorical variable and the vertical axis needs to correspond to a numeric variable.</p>
+<pre class="r"><code>## Space for your answer here
+# ONE SOLUTION
+ggplot(data = pets, 
+       mapping = aes(x = animal, y = weight)) + 
+  geom_boxplot()</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = pets, 
+       mapping = aes(x = animal, y = weight)) + 
+  geom_violin()</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
 <p>Intermediate challenge: How would we plot both boxplots and a violin plot on the same graph?</p>
-<pre class="r"><code>## Space for your answer here</code></pre>
-<pre class="r"><code>## Intermediate: Space for your answer here</code></pre>
+<pre class="r"><code>## Intermediate: Space for your answer here
+
+# ONE SOLUTION
+ggplot(data = pets, 
+       mapping = aes(x = animal, y = weight)) + 
+  geom_boxplot(color = &quot;blue&quot;) +
+  geom_violin(alpha = 0.1)</code></pre>
+<p><img src="Part2-working_with_factors_SOLUTIONS_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="what-you-learned-in-this-section" class="section level2">
 <h2>What you learned in this section</h2>
@@ -384,7 +431,7 @@ ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) +
 </ul>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUGFydCAyIC0gV29ya2luZyB3aXRoIEZhY3RvcnMiCmF1dGhvcjogIlRlZCBMYWRlcmFzIgpkYXRlOiAiNS8xOC8yMDE3IgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgICBjb2RlX2ZvbGRpbmc6IGhpZGUKICAgIGRmX3ByaW50OiBwYWdlZAotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQobWVzc2FnZSA9IEZBTFNFKQpgYGAKCkluIHRoaXMgc2VjdGlvbiwgd2UnbGwgbGVhcm4gc29tZSBza2lsbHMgYWJvdXQgbWFuaXB1bGF0aW5nIGZhY3RvciAoY2F0ZWdvcmljYWwpIGRhdGEuCgpXZSdsbCBkbyB0aGlzIGJ5IG1ha2luZyBhIGJhciBwbG90IHByb2dyZXNzaXZlbHkgbWFraW5nIGl0IG1vcmUgY29tcGxleC4gV2UnbGwgdGhlbiBkaXZlIGludG8gYm94cGxvdHMsIGEgd2F5IHRvIHZpZXcgdGhlIGRpc3RyaWJ1dGlvbiBvZiBhIHZhcmlhYmxlIGFjcm9zcyB0aGUgY2F0ZWdvcmllcyBvZiBhIGRpZmZlcmVudCB2YXJpYWJsZS4KCiMjIFJldmlld2luZyBGYWN0b3JzIAoKRmFjdG9ycyBhcmUgZnJlcXVlbnRseSBob3cgUiByZXByZXNlbnRzIGNhdGVnb3JpY2FsIGRhdGEuCgpUaGVyZSBhcmUgdHdvIGtpbmRzIG9mIGZhY3RvcnM6IAoKKyBgZmFjdG9yYCAtIHVzZWQgZm9yICpub21pbmFsKiBkYXRhICgiRHVja3MiLCAiQ2F0cyIsICJEb2dzIilgCisgYG9yZGVyZWRgLSB1c2VkIGZvciAqb3JkaW5hbCogZGF0YSAoIjEwLTMwIiwiMzEtNDAiLCI0MS02MCIpCgpXZSdsbCBtYW5pcHVsYXRlIG91ciBiYXJwbG90IGFuZCBhZGQgbW9yZSBpbmZvcm1hdGlvbiB1c2luZyBmYWN0b3JzLgoKSGVyZSdzIHRoZSBzaW1wbGUgZGF0YXNldCB3ZSdsbCB1c2UgdG8gaW52ZXN0aWdhdGUgaG93IHRvIHdvcmsgd2l0aCBmYWN0b3JzIGluIGBnZ3Bsb3RgLiBIZXJlIHdlIGFsc28gaW50cm9kdWNlIGhvdyB0byByZWFkIGluIGRhdGEgc3RvcmVkIGluIGFuIFIgZGF0YSBmaWxlIChhbiBSRFMpIGludG8gYSBkYXRhIGZyYW1lIGluIFIuIE5vdGUgdGhlIHNpbWlsYXJpdGllcyB3aXRoIHJlYWRpbmcgaW4gQ1NWIGZpbGVzIChgcmVhZF9yZHMoKWAgdmVyc3VzIGByZWFkX2NzdigpYC4pCgpXZSBkaXNwbGF5IHRoZSBgcGV0c2AgZGF0YSBmcmFtZSBieSBzaW1wbHkgcnVubmluZyB0aGUgbGluZSBjb250YWluaW5nIGBwZXRzYC4KCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKcGV0cyA8LSByZWFkX3JkcygiZGF0YS9wZXRzLnJkcyIpCnBldHMKYGBgCgpXZSBzZWUgdGhhdCBgbmFtZWAgYW5kIGBhbmltYWxgIGFyZSBzdG9yZWQgYXMgYGZhY3RvcmBzIGFuZCBgYWdlX2NhdGVnb3J5YCBpcyBzdG9yZWQgYXMgYW4gb3JkaW5hbCBgZmFjdG9yYC4gTm90ZSB0aGF0IGBuYW1lYCBoYXMgdGhyZWUgbGV2ZWxzIG9yZGVyZWQgYXMgYCIwLTIiYCwgYCIzLTQiYCwgYW5kIGAiNS04ImAuCgojIyBBIEJhc2ljIEJhcnBsb3QgdXNpbmcgYGdlb21fYmFyKClgCgpCeSBkZWZhdWx0LCB0aGUgYGdlb21fYmFyKClgIGZ1bmN0aW9uIGNvdW50cyB0aGUgbnVtYmVyIG9mIHZhbHVlcyB3aXRoIGVhY2ggZmFjdG9yIGxldmVsLiBOb3RlIHRoYXQgeW91IGRvbid0IG1hcCB0byBhIHktYWVzdGhldGljIGhlcmUsIGJlY2F1c2UgdGhlIHkgdmFsdWVzIGFyZSB0aGUgY291bnRzLgoKR2l2ZW4gdGhpcyBkYXRhc2V0LCB3ZSBtaWdodCB3YW50IHRvIGFzayBob3cgbWFueSBwZXRzIGhhdmUgdGhlIHNhbWUgbmFtZS4gV2hhdCBpcyB0aGUgbW9zdCBwb3B1bGFyIG5hbWU/CgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBuYW1lKSkgKyAKICBnZW9tX2JhcigpCmBgYAoKIyMgWW91ciBUYXNrCgpUcnkgbWFwcGluZyBhbm90aGVyIHZhcmlhYmxlIHRvIGBmaWxsYCAodHJ5IGJvdGggYHdlaWdodGAgYW5kIGBhbmltYWxgKS4gQXJlIHRoZSByZXN1bHRzIHdoYXQgeW91IGV4cGVjdGVkPwoKYGBge3J9CiMgVGVzdCBvdXQgYHdlaWdodGAgYW5kIGBhbmltYWxgIGhlcmUKCmBgYAoKCiMjIEZhY2V0aW5nCgpTYXkgeW91IGhhdmUgYW5vdGhlciBgZmFjdG9yYCB2YXJpYWJsZSBhbmQgeW91IHdhbnQgdG8gc3RyYXRpZnkgdGhlIHBsb3RzIGJhc2VkIG9uIHRoYXQuIFlvdSBjYW4gZG8gdGhhdCBieSBzdXBwbHlpbmcgdGhlIG5hbWUgb2YgdGhhdCB2YXJpYWJsZSBhcyBhIGZhY2V0LiBIZXJlLCB3ZSBmYWNldCBvdXIgYmFycGxvdCBieSBgc2hvdHNfY3VycmVudGAuCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBuYW1lKSkgKyAKICBnZW9tX2JhcigpICsgCiAgIyMgaGF2ZSB0byBzcGVjaWZ5IGZhY2V0cyB1c2luZyBub3RhdGlvbgogIGZhY2V0X3dyYXAoZmFjZXRzID0gfiBzaG90c19jdXJyZW50KSArIAogICMjIHdlIG1ha2UgdGhlIHggYXhpcyB4IGFuZ2xlZCBmb3IgYmV0dGVyIGxlZ2liaWxpdHkKICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDkwKSkKYGBgCgpZb3UgbWlnaHQgbm90aWNlIHRoYXQgdGhlcmUgYXJlIGJsYW5rIHNwb3RzIGZvciB0aGUgY2F0ZWdvcmllcyBpbiBlYWNoIGZhY2V0LiBXZSBjYW4gcmVzdHJpY3QgdGhlIGZhY3RvcnMgaW4gZWFjaCBieSB1c2luZyBgc2NhbGUgPSAiZnJlZV94ImAgYXJndW1lbnQgaW4gYGZhY2V0X3dyYXAoKWAuCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBuYW1lKSkgKyAKICBnZW9tX2JhcigpICsgCiAgIyMgaGF2ZSB0byBzcGVjaWZ5IGZhY2V0cyB1c2luZyBub3RhdGlvbgogIGZhY2V0X3dyYXAoZmFjZXRzID0gfiBzaG90c19jdXJyZW50LCBzY2FsZSA9ICJmcmVlX3giKSArIAogICMjIHdlIG1ha2UgdGhlIHggYXhpcyB4IGFuZ2xlZCBmb3IgYmV0dGVyIGxlZ2liaWxpdHkKICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDkwKSkKYGBgCgoKIyMgWW91ciBUYXNrCgpIb3cgbWFueSBhbmltYWxzIG5hbWVkICJNb3JyaXMiIGRpZCBub3QgcmVjZWl2ZSBzaG90cz8KCmBgYHtyfQoKYGBgCgoKV2hhdCBoYXBwZW5zIHdoZW4geW91IHJlcGxhY2UgdGhlIGBzY2FsZWAgYXJndW1lbnQgd2l0aCBgImZyZWVfeSJgPwoKYGBge3J9CmdncGxvdChkYXRhID0gcGV0cywgbWFwcGluZyA9IGFlcyh4ID0gbmFtZSkpICsgCiAgZ2VvbV9iYXIoKSArIAogIGZhY2V0X3dyYXAoZmFjZXRzID0gfiBzaG90c19jdXJyZW50LCBzY2FsZSA9ICJmcmVlX3kiKSArCiAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA5MCkpCmBgYAoKIyMjIFdoYXQncyB1cCB3aXRoIHRoaXMgYH5gIGluIHRoZSBgZmFjZXRzYD8KClRoaXMgaXMga25vd24gYXMgZm9ybXVsYSBub3RhdGlvbiBhbmQgbWlnaHQgbWFrZSBhIGxpdHRsZSBtb3JlIHNlbnNlIGlmIHdlIGV4cGxvcmUgaG93IHRvIGNyZWF0ZSBhIGdyaWQgb2Ygc21hbGxlciBwbG90cyBhY3Jvc3MgdHdvIGRpZmZlcmVudCB2YXJpYWJsZXMuIE5vdGUgdGhhdCBgYW5pbWFsYCBhcHBlYXJzIG9uIHRoZSB2ZXJ0aWNhbCBgeWAgYXhpcyBhbmQgYHNob3RzX2N1cnJlbnRgIGdvZXMgb24gdGhlIGhvcml6b250YWwgYHhgIGF4aXMuIFRoaXMgaXMgaG93IHRvIHJlYWQgdGhpcyBgfmAgaW4gbW9zdCBzZXR0aW5ncyBpbiBSLgoKYGBge3J9CmdncGxvdChkYXRhID0gcGV0cywgbWFwcGluZyA9IGFlcyh4ID0gbmFtZSkpICsgCiAgZ2VvbV9iYXIoKSArIAogIGZhY2V0X2dyaWQoZmFjZXRzID0gYW5pbWFsIH4gc2hvdHNfY3VycmVudCkgKwogIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGFuZ2xlID0gOTApKQpgYGAKCgojIyBTdGFja2VkIEJhcnMKCkxldCdzIHNlZSBob3cgbWFueSBvZiBlYWNoIGFuaW1hbCBnb3Qgc2hvdHMuIFdlIGNhbiBkbyB0aGlzIGJ5IG1hcHBpbmcgYHNob3RzX2N1cnJlbnRgIHRvIGBmaWxsYC4gTm90ZSB0aGF0IHdlIGNhbiBhbHNvIHVzZSBgY29sb3JgIGhlcmUgdG8gc3BlY2lmeSB0aGUgaGlnaGxpZ2h0aW5nIGNvbG9yIG9mIHRoZSBiYXJzLgoKYGBge3J9CiMgV2UgbWFwIGNvbG9yICh0aGUgb3V0bGluZSBvZiB0aGUgcGxvdCkgdG8gYmxhY2sgdG8gbWFrZSBpdCBsb29rIHByZXR0aWVyCiMgTm90ZSB0aGF0IHdlIGRvbid0IGluY2x1ZGUgYGFlc2AgaW4gdGhlIGBjb2xvciA9ICJibGFjayJgIHNpbmNlIHdlIGFyZW4ndAojIG1hcHBpbmcgYW4gYWVzdGhldGljIHRvIGEgdmFyaWFibGUgYnV0IHJhdGhlciBqdXN0IGNoYW5naW5nIHRoZSBzZXR0aW5nLgpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IGFuaW1hbCwgZmlsbCA9IHNob3RzX2N1cnJlbnQpKSArIAogIGdlb21fYmFyKGNvbG9yID0gImJsYWNrIikKYGBgCgojIyBQcm9wb3J0aW9uYWwgQmFyY2hhcnQKCldlIG1heSBvbmx5IGJlIGludGVyZXN0ZWQgaW4gdGhlIHJlbGF0aXZlIHByb3BvcnRpb25zIGJldHdlZW4gdGhlIGRpZmZlcmVudCBjYXRlZ29yaWVzLiBWaXN1YWxpemluZyB0aGlzIGlzIHVzZWZ1bCBmb3IgdmFyaW91cyAyIHggMiB0ZXN0cyBvbiBwcm9wb3J0aW9ucy4KCldoYXQgcGVyY2VudCBvZiBkb2dzIGRpZCBub3QgcmVjZWl2ZSBzaG90cz8KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IGFuaW1hbCwgZmlsbCA9IHNob3RzX2N1cnJlbnQpKSArIAogIGdlb21fYmFyKHBvc2l0aW9uID0gImZpbGwiLCBjb2xvciA9ICJibGFjayIpCmBgYAoKIyMgRG9kZ2UgdGhvc2UgYmFycyEKCkluc3RlYWQgb2Ygc3RhY2tpbmcsIHdlIGNhbiBhbHNvIGRvZGdlIHRoZSBiYXJzIChtb3ZlIHRoZSBiYXJzIHNvIHRoZXkncmUgYmVzaWRlIGVhY2ggb3RoZXIpLgoKYGBge3J9CmdncGxvdChkYXRhID0gcGV0cywgbWFwcGluZyA9IGFlcyh4ID0gYW5pbWFsLCBmaWxsID0gc2hvdHNfY3VycmVudCkpICsgCiAgZ2VvbV9iYXIocG9zaXRpb24gPSAiZG9kZ2UiLCBjb2xvciA9ICJibGFjayIpCmBgYAoKIyMgWW91ciBUYXNrOiBCYXIgQ2hhcnRzCgpHaXZlbiB0aGUgYHBldHNgIGBkYXRhLmZyYW1lYCwgcGxvdCBhIHN0YWNrZWQgcHJvcG9ydGlvbmFsIGJhcmNoYXJ0IHRoYXQgc2hvd3MgYWdlIGNhdGVnb3J5IGJ5IHNob3RzIGJlaW5nIGN1cnJlbnQuIElzIHRoZSBwcm9wb3J0aW9uIG9mIGFuaW1hbHMgcmVjZWl2aW5nIHNob3RzIHRoZSBzYW1lIGFjcm9zcyBlYWNoIGFnZSBjYXRlZ29yeT8KCkhpbnRzOiB0aGluayBhYm91dCB3aGF0IHRvIG1hcCB0byBgeGAsIGFuZCB3aGF0IHRvIG1hcCB0byBgZmlsbGAuCgpJbnRlcm1lZGlhdGUgRm9sa3M6IGZhY2V0IHRoaXMgcGxvdCBieSBgYW5pbWFsYC4gCgpgYGB7cn0KIyBTcGFjZSBmb3IgeW91ciBhbnN3ZXIgaGVyZS4KCmBgYAoKYGBge3J9CiMgSW50ZXJtZWRpYXRlOiBTcGFjZSBmb3IgeW91ciBhbnN3ZXIgaGVyZS4KCmBgYAoKCiMjIEJveHBsb3RzCgpCb3hwbG90cyBhbGxvdyB1cyB0byBhc3Nlc3MgZGlzdHJpYnV0aW9ucyBvZiBhIGNvbnRpbnVvdXMgdmFyaWFibGUgY29uZGl0aW9uZWQgb24gY2F0ZWdvcmljYWwgdmFyaWFibGVzLgoKV2hhdCBkb2VzIHRoaXMgdGVsbCB1cz8gCgpgYGB7cn0KZ2dwbG90KHBldHMsIGFlcyh4ID0gc2hvdHNfY3VycmVudCwgeSA9IHdlaWdodCkpICsgCiAgZ2VvbV9ib3hwbG90KCkKYGBgCgojIyBWaW9saW4gUGxvdHMKClZpb2xpbiBwbG90cyBhcmUgYW5vdGhlciB1c2VmdWwgd2F5IHRvIHZpc3VhbGl6ZSB0aGUgZGF0YS4gVGhleSBwcm92aWRlIGEgbW9yZSBudWFuY2VkIGxvb2sgYXQgdGhlIGRhdGEuIFRoZXkncmUgYSBkZW5zaXR5IHBsb3QgdGhhdCdzIG1pcnJvcmVkIGFyb3VuZCB0aGUgeS1heGlzLgoKYGBge3J9CmdncGxvdChwZXRzLCBhZXMoeCA9IGFnZV9jYXRlZ29yeSwgeSA9IHdlaWdodCwgZmlsbCA9IGFnZV9jYXRlZ29yeSkpICsgCiAgZ2VvbV92aW9saW4oKQpgYGAKCiMjIFlvdXIgdGFzazogSG93IGhlYXZ5IGFyZSBvdXIgcGV0cz8KClZpc3VhbGl6ZSBgd2VpZ2h0YCBieSBgYW5pbWFsYCB0eXBlIGFzIGJvdGggYSBib3hwbG90IGFuZCBhIHZpb2xpbiBwbG90LiBXaGF0IGRvIHlvdSBjb25jbHVkZT8gV2hpY2gga2luZCBvZiBhbmltYWwgd2VpZ2hzIG1vcmUgb24gYXZlcmFnZSB0aGFuIHRoZSBvdGhlcj8KCk5vdGUgdGhhdCB0aGUgaG9yaXpvbnRhbCBheGlzIG5lZWRzIHRvIGNvcnJlc3BvbmQgdG8gdGhlIGNhdGVnb3JpY2FsIHZhcmlhYmxlIGFuZCB0aGUgdmVydGljYWwgYXhpcyBuZWVkcyB0byBjb3JyZXNwb25kIHRvIGEgbnVtZXJpYyB2YXJpYWJsZS4KCkludGVybWVkaWF0ZSBjaGFsbGVuZ2U6IEhvdyB3b3VsZCB3ZSBwbG90IGJvdGggYm94cGxvdHMgYW5kIGEgdmlvbGluIHBsb3Qgb24gdGhlIHNhbWUgZ3JhcGg/CgpgYGB7cn0KIyMgU3BhY2UgZm9yIHlvdXIgYW5zd2VyIGhlcmUKCmBgYAoKYGBge3J9CiMjIEludGVybWVkaWF0ZTogU3BhY2UgZm9yIHlvdXIgYW5zd2VyIGhlcmUKCmBgYAoKCiMjIFdoYXQgeW91IGxlYXJuZWQgaW4gdGhpcyBzZWN0aW9uCgotIFZpc3VhbGl6aW5nIGZhY3RvciBkYXRhCi0gU2ltcGxlLCBzdGFja2VkLCBzdGFja2VkIHByb3BvcnRpb25hbCwgYW5kIGRvZGdlZCBiYXJwbG90cyAKLSBGYWNldGluZyBhIGdyYXBoCi0gQm94cGxvdHMgYW5kIHZpb2xpbiBwbG90cw==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUGFydCAyIC0gV29ya2luZyB3aXRoIEZhY3RvcnMgU09MVVRJT05TIgphdXRob3I6ICJUZWQgTGFkZXJhcyIKZGF0ZTogIjUvMTgvMjAxNyIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgY29kZV9kb3dubG9hZDogdHJ1ZQogICAgY29kZV9mb2xkaW5nOiBzaG93CiAgICBkZl9wcmludDogcGFnZWQKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KG1lc3NhZ2UgPSBGQUxTRSkKYGBgCgpJbiB0aGlzIHNlY3Rpb24sIHdlJ2xsIGxlYXJuIHNvbWUgc2tpbGxzIGFib3V0IG1hbmlwdWxhdGluZyBmYWN0b3IgKGNhdGVnb3JpY2FsKSBkYXRhLgoKV2UnbGwgZG8gdGhpcyBieSBtYWtpbmcgYSBiYXIgcGxvdCBwcm9ncmVzc2l2ZWx5IG1ha2luZyBpdCBtb3JlIGNvbXBsZXguIFdlJ2xsIHRoZW4gZGl2ZSBpbnRvIGJveHBsb3RzLCBhIHdheSB0byB2aWV3IHRoZSBkaXN0cmlidXRpb24gb2YgYSB2YXJpYWJsZSBhY3Jvc3MgdGhlIGNhdGVnb3JpZXMgb2YgYSBkaWZmZXJlbnQgdmFyaWFibGUuCgojIyBSZXZpZXdpbmcgRmFjdG9ycyAKCkZhY3RvcnMgYXJlIGZyZXF1ZW50bHkgaG93IFIgcmVwcmVzZW50cyBjYXRlZ29yaWNhbCBkYXRhLgoKVGhlcmUgYXJlIHR3byBraW5kcyBvZiBmYWN0b3JzOiAKCisgYGZhY3RvcmAgLSB1c2VkIGZvciAqbm9taW5hbCogZGF0YSAoIkR1Y2tzIiwgIkNhdHMiLCAiRG9ncyIpYAorIGBvcmRlcmVkYC0gdXNlZCBmb3IgKm9yZGluYWwqIGRhdGEgKCIxMC0zMCIsIjMxLTQwIiwiNDEtNjAiKQoKV2UnbGwgbWFuaXB1bGF0ZSBvdXIgYmFycGxvdCBhbmQgYWRkIG1vcmUgaW5mb3JtYXRpb24gdXNpbmcgZmFjdG9ycy4KCkhlcmUncyB0aGUgc2ltcGxlIGRhdGFzZXQgd2UnbGwgdXNlIHRvIGludmVzdGlnYXRlIGhvdyB0byB3b3JrIHdpdGggZmFjdG9ycyBpbiBgZ2dwbG90YC4gSGVyZSB3ZSBhbHNvIGludHJvZHVjZSBob3cgdG8gcmVhZCBpbiBkYXRhIHN0b3JlZCBpbiBhbiBSIGRhdGEgZmlsZSAoYW4gUkRTKSBpbnRvIGEgZGF0YSBmcmFtZSBpbiBSLiBOb3RlIHRoZSBzaW1pbGFyaXRpZXMgd2l0aCByZWFkaW5nIGluIENTViBmaWxlcyAoYHJlYWRfcmRzKClgIHZlcnN1cyBgcmVhZF9jc3YoKWAuKQoKV2UgZGlzcGxheSB0aGUgYHBldHNgIGRhdGEgZnJhbWUgYnkgc2ltcGx5IHJ1bm5pbmcgdGhlIGxpbmUgY29udGFpbmluZyBgcGV0c2AuCgpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCnBldHMgPC0gcmVhZF9yZHMoImRhdGEvcGV0cy5yZHMiKQpwZXRzCmBgYAoKV2Ugc2VlIHRoYXQgYG5hbWVgIGFuZCBgYW5pbWFsYCBhcmUgc3RvcmVkIGFzIGBmYWN0b3JgcyBhbmQgYGFnZV9jYXRlZ29yeWAgaXMgc3RvcmVkIGFzIGFuIG9yZGluYWwgYGZhY3RvcmAuIE5vdGUgdGhhdCBgbmFtZWAgaGFzIHRocmVlIGxldmVscyBvcmRlcmVkIGFzIGAiMC0yImAsIGAiMy00ImAsIGFuZCBgIjUtOCJgLgoKIyMgQSBCYXNpYyBCYXJwbG90IHVzaW5nIGBnZW9tX2JhcigpYAoKQnkgZGVmYXVsdCwgdGhlIGBnZW9tX2JhcigpYCBmdW5jdGlvbiBjb3VudHMgdGhlIG51bWJlciBvZiB2YWx1ZXMgd2l0aCBlYWNoIGZhY3RvciBsZXZlbC4gTm90ZSB0aGF0IHlvdSBkb24ndCBtYXAgdG8gYSB5LWFlc3RoZXRpYyBoZXJlLCBiZWNhdXNlIHRoZSB5IHZhbHVlcyBhcmUgdGhlIGNvdW50cy4KCkdpdmVuIHRoaXMgZGF0YXNldCwgd2UgbWlnaHQgd2FudCB0byBhc2sgaG93IG1hbnkgcGV0cyBoYXZlIHRoZSBzYW1lIG5hbWUuIFdoYXQgaXMgdGhlIG1vc3QgcG9wdWxhciBuYW1lPwoKYGBge3J9CmdncGxvdChkYXRhID0gcGV0cywgbWFwcGluZyA9IGFlcyh4ID0gbmFtZSkpICsgCiAgZ2VvbV9iYXIoKQpgYGAKCiMjIFlvdXIgVGFzawoKVHJ5IG1hcHBpbmcgYW5vdGhlciB2YXJpYWJsZSB0byBgZmlsbGAgKHRyeSBib3RoIGB3ZWlnaHRgIGFuZCBgYW5pbWFsYCkuIEFyZSB0aGUgcmVzdWx0cyB3aGF0IHlvdSBleHBlY3RlZD8KCmBgYHtyfQojIFRlc3Qgb3V0IGB3ZWlnaHRgIGFuZCBgYW5pbWFsYCBoZXJlCgojIE9ORSBTT0xVVElPTgpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IG5hbWUsIGZpbGwgPSBhbmltYWwpKSArCiAgZ2VvbV9iYXIoKQoKZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBuYW1lLCBmaWxsID0gd2VpZ2h0KSkgKwogIGdlb21fYmFyKCkKYGBgCgoKIyMgRmFjZXRpbmcKClNheSB5b3UgaGF2ZSBhbm90aGVyIGBmYWN0b3JgIHZhcmlhYmxlIGFuZCB5b3Ugd2FudCB0byBzdHJhdGlmeSB0aGUgcGxvdHMgYmFzZWQgb24gdGhhdC4gWW91IGNhbiBkbyB0aGF0IGJ5IHN1cHBseWluZyB0aGUgbmFtZSBvZiB0aGF0IHZhcmlhYmxlIGFzIGEgZmFjZXQuIEhlcmUsIHdlIGZhY2V0IG91ciBiYXJwbG90IGJ5IGBzaG90c19jdXJyZW50YC4KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IG5hbWUpKSArIAogIGdlb21fYmFyKCkgKyAKICAjIyBoYXZlIHRvIHNwZWNpZnkgZmFjZXRzIHVzaW5nIG5vdGF0aW9uCiAgZmFjZXRfd3JhcChmYWNldHMgPSB+IHNob3RzX2N1cnJlbnQpICsgCiAgIyMgd2UgbWFrZSB0aGUgeCBheGlzIHggYW5nbGVkIGZvciBiZXR0ZXIgbGVnaWJpbGl0eQogIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGFuZ2xlID0gOTApKQpgYGAKCllvdSBtaWdodCBub3RpY2UgdGhhdCB0aGVyZSBhcmUgYmxhbmsgc3BvdHMgZm9yIHRoZSBjYXRlZ29yaWVzIGluIGVhY2ggZmFjZXQuIFdlIGNhbiByZXN0cmljdCB0aGUgZmFjdG9ycyBpbiBlYWNoIGJ5IHVzaW5nIGBzY2FsZSA9ICJmcmVlX3giYCBhcmd1bWVudCBpbiBgZmFjZXRfd3JhcCgpYC4KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IG5hbWUpKSArIAogIGdlb21fYmFyKCkgKyAKICAjIyBoYXZlIHRvIHNwZWNpZnkgZmFjZXRzIHVzaW5nIG5vdGF0aW9uCiAgZmFjZXRfd3JhcChmYWNldHMgPSB+IHNob3RzX2N1cnJlbnQsIHNjYWxlID0gImZyZWVfeCIpICsgCiAgIyMgd2UgbWFrZSB0aGUgeCBheGlzIHggYW5nbGVkIGZvciBiZXR0ZXIgbGVnaWJpbGl0eQogIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGFuZ2xlID0gOTApKQpgYGAKCgojIyBZb3VyIFRhc2sKCkhvdyBtYW55IGFuaW1hbHMgbmFtZWQgIk1vcnJpcyIgZGlkIG5vdCByZWNlaXZlIHNob3RzPwoKYGBge3J9CiMgT05FIFNPTFVUSU9OCmdncGxvdChkYXRhID0gcGV0cywgbWFwcGluZyA9IGFlcyh4ID0gbmFtZSkpICsgCiAgZ2VvbV9iYXIoKSArIAogIGZhY2V0X3dyYXAoZmFjZXRzID0gfiBzaG90c19jdXJyZW50KSArCiAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA5MCkpCmBgYAoKCldoYXQgaGFwcGVucyB3aGVuIHlvdSByZXBsYWNlIHRoZSBgc2NhbGVgIGFyZ3VtZW50IHdpdGggYCJmcmVlX3kiYD8KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IG5hbWUpKSArIAogIGdlb21fYmFyKCkgKyAKICBmYWNldF93cmFwKGZhY2V0cyA9IH4gc2hvdHNfY3VycmVudCwgc2NhbGUgPSAiZnJlZV95IikgKwogIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGFuZ2xlID0gOTApKQpgYGAKCiMjIyBXaGF0J3MgdXAgd2l0aCB0aGlzIGB+YCBpbiB0aGUgYGZhY2V0c2A/CgpUaGlzIGlzIGtub3duIGFzIGZvcm11bGEgbm90YXRpb24gYW5kIG1pZ2h0IG1ha2UgYSBsaXR0bGUgbW9yZSBzZW5zZSBpZiB3ZSBleHBsb3JlIGhvdyB0byBjcmVhdGUgYSBncmlkIG9mIHNtYWxsZXIgcGxvdHMgYWNyb3NzIHR3byBkaWZmZXJlbnQgdmFyaWFibGVzLiBOb3RlIHRoYXQgYGFuaW1hbGAgYXBwZWFycyBvbiB0aGUgdmVydGljYWwgYHlgIGF4aXMgYW5kIGBzaG90c19jdXJyZW50YCBnb2VzIG9uIHRoZSBob3Jpem9udGFsIGB4YCBheGlzLiBUaGlzIGlzIGhvdyB0byByZWFkIHRoaXMgYH5gIGluIG1vc3Qgc2V0dGluZ3MgaW4gUi4KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IG5hbWUpKSArIAogIGdlb21fYmFyKCkgKyAKICBmYWNldF9ncmlkKGZhY2V0cyA9IGFuaW1hbCB+IHNob3RzX2N1cnJlbnQpICsKICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDkwKSkKYGBgCgoKIyMgU3RhY2tlZCBCYXJzCgpMZXQncyBzZWUgaG93IG1hbnkgb2YgZWFjaCBhbmltYWwgZ290IHNob3RzLiBXZSBjYW4gZG8gdGhpcyBieSBtYXBwaW5nIGBzaG90c19jdXJyZW50YCB0byBgZmlsbGAuIE5vdGUgdGhhdCB3ZSBjYW4gYWxzbyB1c2UgYGNvbG9yYCBoZXJlIHRvIHNwZWNpZnkgdGhlIGhpZ2hsaWdodGluZyBjb2xvciBvZiB0aGUgYmFycy4KCmBgYHtyfQojIFdlIG1hcCBjb2xvciAodGhlIG91dGxpbmUgb2YgdGhlIHBsb3QpIHRvIGJsYWNrIHRvIG1ha2UgaXQgbG9vayBwcmV0dGllcgojIE5vdGUgdGhhdCB3ZSBkb24ndCBpbmNsdWRlIGBhZXNgIGluIHRoZSBgY29sb3IgPSAiYmxhY2siYCBzaW5jZSB3ZSBhcmVuJ3QKIyBtYXBwaW5nIGFuIGFlc3RoZXRpYyB0byBhIHZhcmlhYmxlIGJ1dCByYXRoZXIganVzdCBjaGFuZ2luZyB0aGUgc2V0dGluZy4KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBhbmltYWwsIGZpbGwgPSBzaG90c19jdXJyZW50KSkgKyAKICBnZW9tX2Jhcihjb2xvciA9ICJibGFjayIpCmBgYAoKIyMgUHJvcG9ydGlvbmFsIEJhcmNoYXJ0CgpXZSBtYXkgb25seSBiZSBpbnRlcmVzdGVkIGluIHRoZSByZWxhdGl2ZSBwcm9wb3J0aW9ucyBiZXR3ZWVuIHRoZSBkaWZmZXJlbnQgY2F0ZWdvcmllcy4gVmlzdWFsaXppbmcgdGhpcyBpcyB1c2VmdWwgZm9yIHZhcmlvdXMgMiB4IDIgdGVzdHMgb24gcHJvcG9ydGlvbnMuCgpXaGF0IHBlcmNlbnQgb2YgZG9ncyBkaWQgbm90IHJlY2VpdmUgc2hvdHM/CgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBhbmltYWwsIGZpbGwgPSBzaG90c19jdXJyZW50KSkgKyAKICBnZW9tX2Jhcihwb3NpdGlvbiA9ICJmaWxsIiwgY29sb3IgPSAiYmxhY2siKQpgYGAKCiMjIERvZGdlIHRob3NlIGJhcnMhCgpJbnN0ZWFkIG9mIHN0YWNraW5nLCB3ZSBjYW4gYWxzbyBkb2RnZSB0aGUgYmFycyAobW92ZSB0aGUgYmFycyBzbyB0aGV5J3JlIGJlc2lkZSBlYWNoIG90aGVyKS4KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IGFuaW1hbCwgZmlsbCA9IHNob3RzX2N1cnJlbnQpKSArIAogIGdlb21fYmFyKHBvc2l0aW9uID0gImRvZGdlIiwgY29sb3IgPSAiYmxhY2siKQpgYGAKCgojIyBEb2RnZSB0aG9zZSBiYXJzIQoKSW5zdGVhZCBvZiBzdGFja2luZywgd2UgY2FuIGFsc28gZG9kZ2UgdGhlIGJhcnMgKG1vdmUgdGhlIGJhcnMgc28gdGhleSdyZSBiZXNpZGUgZWFjaCBvdGhlcikuCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBhbmltYWwsIGZpbGwgPSBzaG90c19jdXJyZW50KSkgKyAKICBnZW9tX2Jhcihwb3NpdGlvbiA9ICJkb2RnZSIsIGNvbG9yID0gImJsYWNrIikKYGBgCgojIyBZb3VyIFRhc2s6IEJhciBDaGFydHMKCkdpdmVuIHRoZSBgcGV0c2AgYGRhdGEuZnJhbWVgLCBwbG90IGEgc3RhY2tlZCBwcm9wb3J0aW9uYWwgYmFyY2hhcnQgdGhhdCBzaG93cyBhZ2UgY2F0ZWdvcnkgYnkgc2hvdHMgYmVpbmcgY3VycmVudC4gSXMgdGhlIHByb3BvcnRpb24gb2YgYW5pbWFscyByZWNlaXZpbmcgc2hvdHMgdGhlIHNhbWUgYWNyb3NzIGVhY2ggYWdlIGNhdGVnb3J5PwoKSGludHM6IHRoaW5rIGFib3V0IHdoYXQgdG8gbWFwIHRvIGB4YCwgYW5kIHdoYXQgdG8gbWFwIHRvIGBmaWxsYC4KCmBgYHtyfQojIE9ORSBTT0xVVElPTgpnZ3Bsb3QoZGF0YSA9IHBldHMsIG1hcHBpbmcgPSBhZXMoeCA9IGFnZV9jYXRlZ29yeSwgZmlsbCA9IHNob3RzX2N1cnJlbnQpKSArCiAgZ2VvbV9iYXIocG9zaXRpb24gPSAiZmlsbCIsIGNvbG9yID0gImJsYWNrIikKYGBgCgpJbnRlcm1lZGlhdGUgRm9sa3M6IGZhY2V0IHRoaXMgcGxvdCBieSBgYW5pbWFsYC4gCgpgYGB7cn0KIyBJbnRlcm1lZGlhdGU6IFNwYWNlIGZvciB5b3VyIGFuc3dlciBoZXJlLgoKIyBPTkUgU09MVVRJT04KZ2dwbG90KGRhdGEgPSBwZXRzLCBtYXBwaW5nID0gYWVzKHggPSBhZ2VfY2F0ZWdvcnksIGZpbGwgPSBzaG90c19jdXJyZW50KSkgKwogIGdlb21fYmFyKHBvc2l0aW9uID0gImZpbGwiLCBjb2xvciA9ICJibGFjayIpICsKICBmYWNldF93cmFwKGZhY2V0cyA9IH4gYW5pbWFsKQpgYGAKCgojIyBCb3hwbG90cwoKQm94cGxvdHMgYWxsb3cgdXMgdG8gYXNzZXNzIGRpc3RyaWJ1dGlvbnMgb2YgYSBjb250aW51b3VzIHZhcmlhYmxlIGNvbmRpdGlvbmVkIG9uIGNhdGVnb3JpY2FsIHZhcmlhYmxlcy4KCldoYXQgZG9lcyB0aGlzIHRlbGwgdXM/IAoKYGBge3J9CmdncGxvdChkYXRhID0gcGV0cywgbWFwcGluZyA9IGFlcyh4ID0gc2hvdHNfY3VycmVudCwgeSA9IHdlaWdodCkpICsgCiAgZ2VvbV9ib3hwbG90KCkKYGBgCgojIyBWaW9saW4gUGxvdHMKClZpb2xpbiBwbG90cyBhcmUgYW5vdGhlciB1c2VmdWwgd2F5IHRvIHZpc3VhbGl6ZSB0aGUgZGF0YS4gVGhleSBwcm92aWRlIGEgbW9yZSBudWFuY2VkIGxvb2sgYXQgdGhlIGRhdGEuIFRoZXkncmUgYSBkZW5zaXR5IHBsb3QgdGhhdCdzIG1pcnJvcmVkIGFyb3VuZCB0aGUgeS1heGlzLgoKYGBge3J9CmdncGxvdChkYXRhID0gcGV0cywgCiAgICAgICBtYXBwaW5nID0gYWVzKHggPSBhZ2VfY2F0ZWdvcnksIHkgPSB3ZWlnaHQsIGZpbGwgPSBhZ2VfY2F0ZWdvcnkpKSArIAogIGdlb21fdmlvbGluKCkKYGBgCgojIyBZb3VyIHRhc2s6IEhvdyBoZWF2eSBhcmUgb3VyIHBldHM/CgpWaXN1YWxpemUgYHdlaWdodGAgYnkgYGFuaW1hbGAgdHlwZSBhcyBib3RoIGEgYm94cGxvdCBhbmQgYSB2aW9saW4gcGxvdC4gV2hhdCBkbyB5b3UgY29uY2x1ZGU/IFdoaWNoIGtpbmQgb2YgYW5pbWFsIHdlaWdocyBtb3JlIG9uIGF2ZXJhZ2UgdGhhbiB0aGUgb3RoZXI/CgpOb3RlIHRoYXQgdGhlIGhvcml6b250YWwgYXhpcyBuZWVkcyB0byBjb3JyZXNwb25kIHRvIHRoZSBjYXRlZ29yaWNhbCB2YXJpYWJsZSBhbmQgdGhlIHZlcnRpY2FsIGF4aXMgbmVlZHMgdG8gY29ycmVzcG9uZCB0byBhIG51bWVyaWMgdmFyaWFibGUuCgpgYGB7cn0KIyMgU3BhY2UgZm9yIHlvdXIgYW5zd2VyIGhlcmUKIyBPTkUgU09MVVRJT04KZ2dwbG90KGRhdGEgPSBwZXRzLCAKICAgICAgIG1hcHBpbmcgPSBhZXMoeCA9IGFuaW1hbCwgeSA9IHdlaWdodCkpICsgCiAgZ2VvbV9ib3hwbG90KCkKCmdncGxvdChkYXRhID0gcGV0cywgCiAgICAgICBtYXBwaW5nID0gYWVzKHggPSBhbmltYWwsIHkgPSB3ZWlnaHQpKSArIAogIGdlb21fdmlvbGluKCkKYGBgCgpJbnRlcm1lZGlhdGUgY2hhbGxlbmdlOiBIb3cgd291bGQgd2UgcGxvdCBib3RoIGJveHBsb3RzIGFuZCBhIHZpb2xpbiBwbG90IG9uIHRoZSBzYW1lIGdyYXBoPwoKYGBge3J9CiMjIEludGVybWVkaWF0ZTogU3BhY2UgZm9yIHlvdXIgYW5zd2VyIGhlcmUKCiMgT05FIFNPTFVUSU9OCmdncGxvdChkYXRhID0gcGV0cywgCiAgICAgICBtYXBwaW5nID0gYWVzKHggPSBhbmltYWwsIHkgPSB3ZWlnaHQpKSArIAogIGdlb21fYm94cGxvdChjb2xvciA9ICJibHVlIikgKwogIGdlb21fdmlvbGluKGFscGhhID0gMC4xKQpgYGAKCgojIyBXaGF0IHlvdSBsZWFybmVkIGluIHRoaXMgc2VjdGlvbgoKLSBWaXN1YWxpemluZyBmYWN0b3IgZGF0YQotIFNpbXBsZSwgc3RhY2tlZCwgc3RhY2tlZCBwcm9wb3J0aW9uYWwsIGFuZCBkb2RnZWQgYmFycGxvdHMgCi0gRmFjZXRpbmcgYSBncmFwaAotIEJveHBsb3RzIGFuZCB2aW9saW4gcGxvdHM=</div>
 
 
 

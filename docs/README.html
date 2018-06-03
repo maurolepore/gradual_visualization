@@ -184,10 +184,19 @@ $(document).ready(function () {
   <a href="Part1-ggplot2_intro.html">Part 1</a>
 </li>
 <li>
+  <a href="Part1-ggplot2_intro_SOLUTIONS.html">Part 1 Solutions</a>
+</li>
+<li>
   <a href="Part2-working_with_factors.html">Part 2</a>
 </li>
 <li>
+  <a href="Part2-working_with_factors_SOLUTIONS.html">Part 2 Solutions</a>
+</li>
+<li>
   <a href="Part3-interactive_plots.html">Part 3</a>
+</li>
+<li>
+  <a href="Part3-interactive_plots_SOLUTIONS.html">Part 3 Solutions</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -207,19 +216,22 @@ $(document).ready(function () {
 
 <div id="a-gradual-introduction-to-data-visualization" class="section level1">
 <h1>A gRadual intRoduction to data visualization</h1>
+<p>Chester Ismay and Ted Laderas</p>
 <p>Welcome! This is a workshop for the Cascadia R conference that is meant to be a gentle introduction to data visualization using the <code>ggplot2</code> and the <code>plotly</code> packages.</p>
 <p>You’ll learn the basics of the grammar of graphics and learn how to visualize and understand relationships between different kinds of variables in your dataset.</p>
 <div id="prerequisites" class="section level2">
 <h2>Prerequisites</h2>
-<p>Please make sure to have this completed prior to the workshop beginning. To participate in this workshop, you’ll need to do the following on your own laptops:</p>
+<p>Please make sure to have this completed prior to the workshop beginning. Reading over all the materials here will help you get an understanding of what is to be expected and a better grounding to dive into the material as the workshop gets started. To participate in this workshop, you’ll need to do the following on your own laptops:</p>
 <ol style="list-style-type: decimal">
 <li>Have the latest version of R AND RStudio installed (<a href="http://moderndive.netlify.com/2-getting-started.html#what-are-r-and-rstudio">Directions are here</a>)</li>
 <li>Be familiar with the <a href="https://ismayc.github.io/rbasics-book/3-rstudiobasics.html#rstudio-layout">basics of the RStudio Interface</a></li>
-<li><p>Have the following R packages installed: <code>tidyverse</code>, <code>plotly</code>, <code>gapminder</code>, and <code>fivethirtyeight</code></p>
-<p>This can be accomplished by copying the following code into the <em>Console</em> in RStudio and pressing Enter. Note that you’ll see quite a few lines of code run while the packages are installing. Don’t be alarmed. After all four of these packages are installed you should see them listed in the Packages tab in the bottom right section of RStudio.</p>
-<pre><code>install.packages(c(&quot;tidyverse&quot;, &quot;plotly&quot;, &quot;gapminder&quot;, &quot;fivethirtyeight&quot;))</code></pre>
+<li><p>Have the following R packages installed: <code>dplyr</code>, <code>readr</code>, <code>plotly</code>, <code>gapminder</code>, <code>remotes</code>, <code>fivethirtyeight</code>, and <code>ggplot2</code>.</p>
+<p>This can be accomplished by copying the following code into the <em>Console</em> in RStudio and pressing Enter. Note that you’ll see quite a few lines of code run while the packages are installing. Don’t be alarmed. After all of these packages are installed you should see them listed in the Packages tab in the bottom right section of RStudio.</p>
+<p>We needed to install the developmental version of the <code>ggplot2</code> package in order for it to work nicely with the <code>plotly</code> package in Part 3 of this workshop and this is the reason for installing the <a href="https://github.com/r-lib/remotes"><code>remotes</code></a> package as well.</p>
+<pre><code>install.packages(c(&quot;dplyr&quot;, &quot;readr&quot;, &quot;plotly&quot;, &quot;gapminder&quot;, &quot;remotes&quot;, &quot;fivethirtyeight&quot;))
+remotes::install_github(&quot;tidyverse/ggplot2&quot;)</code></pre>
 <ul>
-<li>The <a href="http://tidyverse.tidyverse.org/"><code>tidyverse</code></a> package installs a variety of different packages that will be useful in your analysis including the <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> package that will be the focus of this workshop.</li>
+<li>The <a href="http://tidyverse.tidyverse.org/"><code>tidyverse</code></a> contains a variety of different packages that will be useful in your analysis including the <a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> package that will be the focus of this workshop. We’ll also use the <a href="https://ggplot2.tidyverse.org/"><code>dplyr</code></a> package for data wrangling and the <a href="https://readr.tidyverse.org/"><code>readr</code></a> package for reading in data.</li>
 <li>The <a href="https://plotly-book.cpsievert.me/"><code>plotly</code></a> package will be used for interactive graphics.</li>
 <li>The <a href="https://github.com/jennybc/gapminder/blob/master/README.md"><code>gapminder</code></a> package contains a data set made famous by Hans Rosling exploring data on the world’s countries.</li>
 <li>The <a href="http://fivethirtyeight-r.netlify.com/"><code>fivethirtyeight</code></a> package contains many datasets used by data journalists at FiveThirtyEight.com.</li>
@@ -231,8 +243,8 @@ $(document).ready(function () {
 <ul>
 <li>Download the conference materials as a <a href="https://github.com/tidyverse-intro/gradual_visualization/archive/master.zip">ZIP file</a> and extract the files there as a folder on your computer. Note the importance of actually extracting all the files to a folder. Double click on the <strong>gradual_visualization.Rproj</strong> file in that folder to open up an RStudio project containing the files needed for the workshop.</li>
 </ul>
-<p>You’ll be following along in the <strong>Part1-ggplot2_intro.Rmd</strong>, <strong>Part2-working_with_factors.Rmd</strong>, and <strong>Part3-interactive_plots.Rmd</strong> files, running the R code in the “chunks” there, and writing your own code to practice.</p>
-<p>Remember, in this workshop we will adhere the <a href="https://cascadiarconf.com/coc/">code of conduct for this conference</a>. Be respectful of your fellow students and let’s learn together.</p>
+<p>You’ll be following along in the <strong>Part1-ggplot2_intro.Rmd</strong>, <strong>Part2-working_with_factors.Rmd</strong>, and <strong>Part3-interactive_plots.Rmd</strong> files, running the R code in the “chunks” there, and writing your own code to practice. You can also follow along with the webpage for the workshop at <a href="https://cascadiarconf-viz.netlify.com" class="uri">https://cascadiarconf-viz.netlify.com</a>.</p>
+<p>Remember, in this workshop we will adhere to the <a href="https://cascadiarconf.com/coc/">code of conduct for this conference</a>. Be respectful of your fellow students, workshop leaders, and workshop TAs and let’s learn together.</p>
 </div>
 <div id="outline-of-this-workshop" class="section level2">
 <h2>Outline of this Workshop</h2>
@@ -248,7 +260,7 @@ $(document).ready(function () {
 <li>More about <code>geom</code>s</li>
 <li>Learning to create small multiple plots using <code>facet</code>ing</li>
 </ul></li>
-<li>Visualizing categorical versus continuous data (boxplots)</li>
+<li>Visualizing categorical versus continuous data (boxplots and violin plots)</li>
 <li>Making your plots interactive using the <code>ggplotly()</code> function in the <code>plotly</code> package</li>
 </ol>
 </div>
