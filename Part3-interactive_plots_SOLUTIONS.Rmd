@@ -1,10 +1,10 @@
 ---
-title: "Part 3 - Converting to interactive graphics"
+title: "Part 3 - Converting to interactive graphics SOLUTIONS"
 author: "Chester Ismay"
 output: 
   html_document:
     code_download: true
-    code_folding: hide
+    code_folding: show
 ---
 
 Up to this point, we've worked with four different types of plots. Can you name them?
@@ -56,6 +56,9 @@ Use data visualization to determine which day (date and day of the week) had the
 ```{r}
 # Enter your plot code here
 
+# ONE SOLUTION
+ggplotly()
+# Christmas Day (2009-12-25) had the lowest and 2009-09-09 had the highest.
 ```
 
 `ggplotly()` doesn't work in all circumstances but is pretty slick when it does work! Note that you can also assign the plots to have a name and then use that as an argument to the `ggplotly()` function:

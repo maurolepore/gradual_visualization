@@ -1,11 +1,11 @@
 ---
-title: "Part 2 - Working with Factors"
+title: "Part 2 - Working with Factors SOLUTIONS"
 author: "Ted Laderas"
 date: "5/18/2017"
 output: 
   html_document:
     code_download: true
-    code_folding: hide
+    code_folding: show
     df_print: paged
 ---
 
@@ -58,6 +58,12 @@ Try mapping another variable to `fill` (try both `weight` and `animal`). Are the
 ```{r}
 # Test out `weight` and `animal` here
 
+# ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = name, fill = animal)) +
+  geom_bar()
+
+ggplot(data = pets, mapping = aes(x = name, fill = weight)) +
+  geom_bar()
 ```
 
 
@@ -91,7 +97,11 @@ ggplot(data = pets, mapping = aes(x = name)) +
 How many animals named "Morris" did not receive shots?
 
 ```{r}
-
+# ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = name)) + 
+  geom_bar() + 
+  facet_wrap(facets = ~ shots_current) +
+  theme(axis.text.x = element_text(angle = 90))
 ```
 
 
@@ -148,22 +158,37 @@ ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) +
   geom_bar(position = "dodge", color = "black")
 ```
 
+
+## Dodge those bars!
+
+Instead of stacking, we can also dodge the bars (move the bars so they're beside each other).
+
+```{r}
+ggplot(data = pets, mapping = aes(x = animal, fill = shots_current)) + 
+  geom_bar(position = "dodge", color = "black")
+```
+
 ## Your Task: Bar Charts
 
 Given the `pets` `data.frame`, plot a stacked proportional barchart that shows age category by shots being current. Is the proportion of animals receiving shots the same across each age category?
 
 Hints: think about what to map to `x`, and what to map to `fill`.
 
-Intermediate Folks: facet this plot by `animal`. 
-
 ```{r}
-# Space for your answer here.
-
+# ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = age_category, fill = shots_current)) +
+  geom_bar(position = "fill", color = "black")
 ```
+
+Intermediate Folks: facet this plot by `animal`. 
 
 ```{r}
 # Intermediate: Space for your answer here.
 
+# ONE SOLUTION
+ggplot(data = pets, mapping = aes(x = age_category, fill = shots_current)) +
+  geom_bar(position = "fill", color = "black") +
+  facet_wrap(facets = ~ animal)
 ```
 
 
@@ -174,7 +199,7 @@ Boxplots allow us to assess distributions of a continuous variable conditioned o
 What does this tell us? 
 
 ```{r}
-ggplot(pets, aes(x = shots_current, y = weight)) + 
+ggplot(data = pets, mapping = aes(x = shots_current, y = weight)) + 
   geom_boxplot()
 ```
 
@@ -183,7 +208,8 @@ ggplot(pets, aes(x = shots_current, y = weight)) +
 Violin plots are another useful way to visualize the data. They provide a more nuanced look at the data. They're a density plot that's mirrored around the y-axis.
 
 ```{r}
-ggplot(pets, aes(x = age_category, y = weight, fill = age_category)) + 
+ggplot(data = pets, 
+       mapping = aes(x = age_category, y = weight, fill = age_category)) + 
   geom_violin()
 ```
 
@@ -193,16 +219,28 @@ Visualize `weight` by `animal` type as both a boxplot and a violin plot. What do
 
 Note that the horizontal axis needs to correspond to the categorical variable and the vertical axis needs to correspond to a numeric variable.
 
-Intermediate challenge: How would we plot both boxplots and a violin plot on the same graph?
-
 ```{r}
 ## Space for your answer here
+# ONE SOLUTION
+ggplot(data = pets, 
+       mapping = aes(x = animal, y = weight)) + 
+  geom_boxplot()
 
+ggplot(data = pets, 
+       mapping = aes(x = animal, y = weight)) + 
+  geom_violin()
 ```
+
+Intermediate challenge: How would we plot both boxplots and a violin plot on the same graph?
 
 ```{r}
 ## Intermediate: Space for your answer here
 
+# ONE SOLUTION
+ggplot(data = pets, 
+       mapping = aes(x = animal, y = weight)) + 
+  geom_boxplot(color = "blue") +
+  geom_violin(alpha = 0.1)
 ```
 
 
