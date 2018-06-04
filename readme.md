@@ -12,7 +12,8 @@ Please make sure to have this completed prior to the workshop beginning. Reading
 
 1. Have the latest version of R AND RStudio installed ([Directions are here](http://moderndive.netlify.com/2-getting-started.html#what-are-r-and-rstudio))
 2. Be familiar with the [basics of the RStudio Interface](https://ismayc.github.io/rbasics-book/3-rstudiobasics.html#rstudio-layout)
-3. Have the following R packages installed: `dplyr`, `readr`, `plotly`, `gapminder`, `remotes`, `fivethirtyeight`, and `ggplot2`. 
+3. We further recommend you read through the first two chapters of the free [ModernDive](http://moderndive.netlify.com) textbook to get up-to-speed/refreshed on R programming. It isn't essential that you do everything there, but we will expect you have gone through this material prior to the workshop starting. If you have questions about this prerequisite material, please reach out!
+4. Have the following R packages installed: `dplyr`, `readr`, `plotly`, `gapminder`, `remotes`, `fivethirtyeight`, and `ggplot2`. 
 
     This can be accomplished by copying the following code into the *Console* in RStudio and pressing Enter. Note that you'll see quite a few lines of code run while the packages are installing. Don't be alarmed. After all of these packages are installed you should see them listed in the Packages tab in the bottom right section of RStudio.
     
